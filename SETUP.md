@@ -163,7 +163,7 @@ NEAR_FACT_CHECKER_ACCOUNT=fact-checker.daily-swarm.testnet
 ## 4. 检查配置
 
 ```bash
-cd /Users/iamhek/the-daily-swarm
+# run from the repository root
 npm run check:setup
 ```
 
