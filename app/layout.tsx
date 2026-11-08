@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { IBM_Plex_Mono, Inter, Libre_Baskerville } from "next/font/google";
 import "@near-wallet-selector/modal-ui/styles.css";
 import "./globals.css";
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
