@@ -1,36 +1,190 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Daily Swarm
 
-## Getting Started
+[![CI](https://github.com/chaoticpunk/the-daily-swarm/actions/workflows/ci.yml/badge.svg)](https://github.com/chaoticpunk/the-daily-swarm/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-First, run the development server:
+An autonomous newsroom with a public ledger.
+
+Three desks pitch stories. An editor commissions two. A standards desk checks every claim. Readers unlock the edition with 1 testnet NEAR, and the revenue split settles on NEAR.
+
+The desks are autonomous software agents. The edition is the output; the settlement is the proof.
+
+> Demo edition · curated sources · NEAR testnet only.
+
+## Status
+
+The newsroom, live LLM editions, NEAR testnet reader-payment verification, and the payout ledger have been exercised end-to-end. The app supports both NEAR Wallet Selector payments and manual transaction verification. Public deployment and a full MyNearWallet signing run are still outstanding.
+
+## Screenshots
+
+![The desk during edition production](docs/screenshots/newsroom.png)
+
+![A published edition with the reader receipt and settlement](docs/screenshots/edition.png)
+
+## How an edition is made
+
+1. **Pitch.** The NEAR, AI, and markets desks read a curated source pack and file one pitch each: headline, angle, sourced claims, fee, and word count.
+2. **Commission.** The editor selects two pitches against a fixed editorial budget and records a reason for passing on the third.
+3. **File.** Each commissioned desk writes to its assigned length. Every factual claim cites a source ID from the pack.
+4. **Check.** The standards desk reviews every claim. Unsupported claims force one revision, followed by a re-check.
+5. **Publish.** The editor writes a note, sets the front-page order, and selects a pull quote. Readers unlock the edition with 1 testnet NEAR; the treasury settles the split.
+
+A failed stage remains visible with its error and a retry. No result after a failure is generated or substituted.
+
+## Stack
+
+- Next.js 16 App Router, React 19, TypeScript
+- Tailwind CSS 4
+- Zod for every LLM response
+- Zustand for the browser orchestration state machine
+- `near-api-js` for RPC reads, payment verification, and treasury transfers
+- NEAR Wallet Selector with MyNearWallet on testnet
+- OpenAI-compatible LLM endpoint, server-side only
+- Vitest for unit and fixture-LLM integration tests
+
+## Local development
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The full setup guide, including the Chinese step-by-step for NEAR testnet accounts and treasury keys, is in **[SETUP.md](SETUP.md)**.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Environment
 
-## Learn More
+All secrets are server-side. Nothing secret uses a `NEXT_PUBLIC_` prefix.
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `NEARAI_CLOUD_API_KEY` | one LLM key | NEAR AI Cloud key |
+| `NEARAI_CLOUD_BASE_URL` | no | Defaults to `https://cloud-api.near.ai` |
+| `NEARAI_MODEL` | no | Model ID; the verified configuration uses `Qwen/Qwen3.8-27B` |
+| `LLM_API_KEY` / `LLM_BASE_URL` / `LLM_MODEL` | alternative | Any OpenAI-compatible provider |
+| `LLM_JSON_MODE` | no | `false` disables `response_format` |
+| `LLM_CHAT_TEMPLATE_KWARGS` | no | JSON passed as `chat_template_kwargs`, e.g. `{"enable_thinking":false}` for Qwen |
+| `LLM_TIMEOUT_MS` | no | Per-call timeout; defaults to 25000 |
+| `NEAR_NETWORK` | yes | Must be `testnet` for settlement |
+| `NEAR_RPC_URL` | no | Defaults to `https://test.rpc.fastnear.com` |
+| `NEAR_TREASURY_ACCOUNT` | yes | Receives reader payments and signs payouts |
+| `NEAR_TREASURY_PRIVATE_KEY` | for payouts | Full-access treasury key, server-only |
+| `NEAR_EDITOR_ACCOUNT`, `NEAR_REPORTER_*_ACCOUNT`, `NEAR_FACT_CHECKER_ACCOUNT` | no | Account overrides |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The public `rpc.testnet.near.org` endpoint is deprecated and returns HTTP 429. Keep the FastNEAR default or configure another provider from the [NEAR RPC provider list](https://docs.near.org/api/rpc/providers).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For Qwen thinking models on NEAR AI Cloud, use:
 
-## Deploy on Vercel
+```bash
+NEARAI_CLOUD_API_KEY=...
+NEARAI_CLOUD_BASE_URL=https://cloud-api.near.ai
+NEARAI_MODEL=Qwen/Qwen3.8-27B
+LLM_JSON_MODE=false
+LLM_CHAT_TEMPLATE_KWARGS={"enable_thinking":false}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## NEAR testnet
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The app uses one treasury and five desk accounts:
+
+```text
+daily-swarm.testnet
+  editor.daily-swarm.testnet
+  reporter-near.daily-swarm.testnet
+  reporter-ai.daily-swarm.testnet
+  reporter-markets.daily-swarm.testnet
+  fact-checker.daily-swarm.testnet
+treasury.daily-swarm.testnet
+```
+
+Only the treasury key is needed server-side. Desk accounts only receive funds. See [SETUP.md](SETUP.md) for account creation, funding, and key export. Never use a mainnet key.
+
+## Routes
+
+| Route | Method | Purpose |
+| --- | --- | --- |
+| `/` | GET | Front page and product overview |
+| `/newsroom` | GET | Produce an edition; pitches, commissions, workflow, checks |
+| `/edition/[id]` | GET | Published edition, reader access, receipt, settlement |
+| `/ledger` | GET | Reader payments and contributor payouts |
+| `/api/agent/pitch` | POST | One desk pitch |
+| `/api/agent/select` | POST | Editor commissions two pitches |
+| `/api/agent/write` | POST | Desk writes a commissioned story |
+| `/api/agent/fact-check` | POST | Standards desk review (also used for re-checks) |
+| `/api/agent/revise` | POST | Desk revises flagged claims once |
+| `/api/agent/editor-note` | POST | Editor's note, front-page order, pull quote |
+| `/api/near/verify-payment` | POST | Verify a reader transfer via RPC |
+| `/api/near/payout` | POST | Re-verify the payment, then settle the split |
+| `/api/near/balances` | GET | Read desk and treasury balances |
+| `/api/health` | GET | LLM and NEAR readiness |
+
+Each agent route is a short request with `maxDuration = 55`. The browser owns the sequence; no serverless function holds a long-lived run.
+
+## Data
+
+`data/topics.json` contains the curated source pack: six topics across the three beats, 30 facts, 17 source URLs. The desks cannot browse the web. Every pitch and draft claim must cite a source ID from this pack.
+
+## Revenue split
+
+| Recipient | Share |
+| --- | ---: |
+| Reporters | 55%, pro rata by commission fee |
+| Editor-in-Chief | 20% |
+| Fact-checker | 15% |
+| Treasury | 10%, absorbing rounding |
+
+The split is computed in 1e-4 NEAR integer units. The treasury share stays in the treasury; it is not sent as a self-transfer.
+
+## Testing
+
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run build
+```
+
+The suite covers the deterministic split, schema rejection, editor budget and reporter constraints, source-ID constraints, payment verification failures, payout classification, the client state machine, and a full fixture-LLM edition (pitch → commission → write → check → revise → re-check → layout).
+
+To run a real edition from the CLI:
+
+```bash
+npm run edition
+```
+
+It prints the edition JSON. Progress logs go to stderr. There is no fixture fallback in the CLI or the app.
+
+## Testnet transactions
+
+A live reader payment and the resulting split, verifiable on the NEAR testnet explorer:
+
+| Entry | Amount | Transaction |
+| --- | ---: | --- |
+| Reader payment | 1.0000 NEAR | [`2uSk38vY…7zHdbqb9`](https://explorer.testnet.near.org/transactions/2uSk38vYceTVZ7QFZYvkRpRUAcVZHR2G2bUh7zHdbqb9) |
+| Reporter, NEAR | 0.2750 NEAR | [`HcrkSQAu…LezcqdXJ`](https://explorer.testnet.near.org/transactions/HcrkSQAuDht4HLEWePLxJi2MTenqWuE2Hib8LezcqdXJ) |
+| Reporter, markets | 0.2750 NEAR | [`Ejm9QaZH…BKKLk9ei`](https://explorer.testnet.near.org/transactions/Ejm9QaZHmMVDb9S1Y7iWjHZUgho98uAAGQGLBKKLk9ei) |
+| Editor-in-Chief | 0.2000 NEAR | [`EUVE6Ltr…hvdyQWUm`](https://explorer.testnet.near.org/transactions/EUVE6LtrjMZ5jc3TypMBaWGemZas2HJBo1ADhvdyQWUm) |
+| Fact-checker | 0.1500 NEAR | [`DuxuGTay…xFR61FLY`](https://explorer.testnet.near.org/transactions/DuxuGTayazLBNYgN661ArSsW7ui27k5XUKawxFR61FLY) |
+| Treasury | 0.1000 NEAR | Retained in treasury |
+
+## Deployment
+
+Vercel works because each agent stage is a short request. Set the LLM and NEAR variables in the host; do not put them in `NEXT_PUBLIC_*`. Keep each route under 60 seconds.
+
+## Limitations
+
+- Editions and ledger rows are stored in the browser that produced them. A shared `/edition/[id]` link does not carry the edition to another browser.
+- There is no database, user account system, or rate limiting. This is a public demo; cap or rotate the LLM key before operating it at scale.
+- A reader payment is not bound to a per-edition memo or unique address. Settlement is re-verified server-side, and a process-memory replay guard prevents duplicate payouts within one server process. That guard does not survive a serverless cold start.
+- The reader can verify a transfer manually if the wallet flow is unavailable. The full MyNearWallet signing path is the one UI path not yet exercised end-to-end.
+- Testnet only. No mainnet, real money, or custom token.
+
+## Project
+
+Built for **NEAR Hackathon 2026**, `swarms` track.
+
+This is the second, independent project by the author of [Sealed Ledger](https://github.com/chaoticpunk/sealed-ledger). No Sealed Ledger code, styles, or assets are reused.
+
+[MIT](LICENSE)

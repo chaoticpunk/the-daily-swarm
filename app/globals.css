@@ -1,26 +1,251 @@
 @import "tailwindcss";
 
+@theme {
+  --color-newsprint: #f5f2ea;
+  --color-newsprint-deep: #ece7da;
+  --color-ink: #111111;
+  --color-ink-soft: #494540;
+  --color-accent: #c62828;
+  --color-accent-deep: #8f1d1d;
+  --color-gold: #f2c14e;
+  --color-rule: #c9c2b2;
+  --color-rule-soft: #ddd6c7;
+  --color-success: #2f6b3f;
+  --font-serif: var(--font-libre-baskerville), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), "SFMono-Regular", Menlo, monospace;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f2ea;
+  --foreground: #111111;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  border-color: var(--color-rule-soft);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: var(--color-newsprint);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-newsprint);
+  background-image:
+    radial-gradient(circle at 10% 0%, rgba(198, 40, 40, 0.035), transparent 28%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(17, 17, 17, 0.012) 0px,
+      rgba(17, 17, 17, 0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "kern", "liga";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fffaf0;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.font-headline {
+  font-family: var(--font-serif);
+  letter-spacing: -0.015em;
+}
+
+.news-caps {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.rule-top {
+  border-top: 3px solid var(--color-ink);
+}
+
+.rule-thin {
+  border-top: 1px solid var(--color-rule);
+}
+
+.ink-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+}
+
+.ledger-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.paper-panel {
+  background: rgba(255, 253, 247, 0.62);
+  border: 1px solid var(--color-rule);
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.04);
+}
+
+.paper-inset {
+  background: rgba(236, 231, 218, 0.5);
+  border: 1px solid var(--color-rule-soft);
+}
+
+.headline-link {
+  text-decoration: none;
+}
+
+.headline-link:hover {
+  color: var(--color-accent-deep);
+}
+
+.bid-card {
+  animation: bid-in 360ms ease-out both;
+}
+
+@keyframes bid-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.run-progress-pulse {
+  animation: pulse-soft 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* Markdown article body */
+.article-body {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #1c1a17;
+}
+
+.article-body > * + * {
+  margin-top: 1em;
+}
+
+.article-body h2,
+.article-body h3 {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  margin-top: 1.6em;
+}
+
+.article-body h2 {
+  font-size: 1.125rem;
+  text-transform: uppercase;
+}
+
+.article-body h3 {
+  font-size: 1rem;
+}
+
+.article-body p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  line-height: 0.82;
+  padding-right: 0.1em;
+  padding-top: 0.08em;
+  font-weight: 700;
+  color: var(--color-accent-deep);
+}
+
+.article-body blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+
+.article-body a {
+  color: var(--color-accent-deep);
+  text-decoration: underline;
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.4rem;
+}
+
+.article-body ul {
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body li + li {
+  margin-top: 0.35rem;
+}
+
+.article-body strong {
+  font-weight: 700;
+}
+
+.article-body code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgba(17, 17, 17, 0.06);
+  padding: 0.1em 0.3em;
+}
+
+.article-body hr {
+  border: 0;
+  border-top: 1px solid var(--color-rule);
+  margin: 1.5rem 0;
+}
+
+.article-body .analysis-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-deep);
+}
+
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bid-card,
+  .run-progress-pulse {
+    animation: none;
+  }
 }

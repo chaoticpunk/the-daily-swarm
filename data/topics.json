@@ -1,0 +1,263 @@
+{
+  "editionDate": "2026-11-13",
+  "topics": [
+    {
+      "id": "near-intents-solver-market",
+      "beat": "near",
+      "title": "NEAR Intents and Its Solver Market",
+      "angleHint": "How NEAR Intents turns a user's desired outcome into competing solver quotes settled by an on-chain verifier.",
+      "facts": [
+        {
+          "id": "near-intents-solver-market-1",
+          "text": "In NEAR Intents, an intent expresses what a user wants to achieve rather than how to achieve it.",
+          "sourceTitle": "What are Intents?",
+          "sourceUrl": "https://docs.near-intents.org/getting-started/what-are-intents",
+          "supportingQuote": "An intent expresses what you want to achieve, not how to get it."
+        },
+        {
+          "id": "near-intents-solver-market-2",
+          "text": "NEAR Intents sends quote requests to solvers over the Message Bus, a WebSocket relay that broadcasts each request to all connected solvers.",
+          "sourceTitle": "Market Makers",
+          "sourceUrl": "https://docs.near-intents.org/integration/market-makers/introduction",
+          "supportingQuote": "A user sends a quote request to the Message Bus, a WebSocket relay that broadcasts the request to all connected solvers."
+        },
+        {
+          "id": "near-intents-solver-market-3",
+          "text": "Once a user accepts a quote, the intent is executed by calling the Verifier smart contract on NEAR Protocol.",
+          "sourceTitle": "NEAR Intents",
+          "sourceUrl": "https://docs.near.org/chain-abstraction/intents/overview",
+          "supportingQuote": "the intent is executed by calling a \"Verifier\" smart contract on NEAR Protocol."
+        },
+        {
+          "id": "near-intents-solver-market-4",
+          "text": "If an intent cannot be fulfilled, the transaction is reverted and funds are returned to the refund address.",
+          "sourceTitle": "What are Intents?",
+          "sourceUrl": "https://docs.near-intents.org/getting-started/what-are-intents",
+          "supportingQuote": "Transactions either complete with all conditions met, or they are reverted and funds returned to the refund address."
+        },
+        {
+          "id": "near-intents-solver-market-5",
+          "text": "When a user signs with an existing wallet, the Verifier derives an account from their public key, removing the need to create a NEAR account.",
+          "sourceTitle": "Account Abstraction",
+          "sourceUrl": "https://docs.near-intents.org/integration/verifier-contract/account-abstraction",
+          "supportingQuote": "When a user signs with their existing wallet, the Verifier derives an account from their public key."
+        }
+      ]
+    },
+    {
+      "id": "near-ai-cloud-confidential-inference",
+      "beat": "near",
+      "title": "NEAR AI Cloud's Confidential Inference",
+      "angleHint": "NEAR AI Cloud runs models inside hardware enclaves and publishes attestations users can verify.",
+      "facts": [
+        {
+          "id": "near-ai-cloud-confidential-inference-1",
+          "text": "NEAR AI Cloud combines Intel TDX and NVIDIA TEE technologies to create isolated, secure environments for AI computation.",
+          "sourceTitle": "Private Inference",
+          "sourceUrl": "https://docs.near.ai/cloud/private-inference/",
+          "supportingQuote": "NEAR AI Cloud combines Intel TDX and NVIDIA TEE technologies to create isolated, secure environments for AI computation"
+        },
+        {
+          "id": "near-ai-cloud-confidential-inference-2",
+          "text": "NEAR AI Cloud states that infrastructure providers, model providers, and NEAR itself cannot access user data at any point in the process.",
+          "sourceTitle": "Private Inference",
+          "sourceUrl": "https://docs.near.ai/cloud/private-inference/",
+          "supportingQuote": "Infrastructure providers, model providers, and NEAR cannot access your data at any point in the process."
+        },
+        {
+          "id": "near-ai-cloud-confidential-inference-3",
+          "text": "Every TEE environment used by NEAR AI Cloud generates cryptographic proofs that verify the integrity of the execution environment.",
+          "sourceTitle": "Private Inference",
+          "sourceUrl": "https://docs.near.ai/cloud/private-inference/",
+          "supportingQuote": "Every TEE environment generates cryptographic proofs that verify the integrity of the execution environment"
+        },
+        {
+          "id": "near-ai-cloud-confidential-inference-4",
+          "text": "NEAR AI Cloud exposes an OpenAI-compatible API, which its documentation says makes integration with existing tools and libraries easy.",
+          "sourceTitle": "Quickstart",
+          "sourceUrl": "https://docs.near.ai/cloud/quickstart",
+          "supportingQuote": "NEAR AI Cloud uses an OpenAI-compatible API, making it easy to integrate with existing tools and libraries."
+        },
+        {
+          "id": "near-ai-cloud-confidential-inference-5",
+          "text": "NEAR AI Cloud's documentation lists a Confidential TEE tier whose models run on NEAR AI's own GPU fleet inside Trusted Execution Environments.",
+          "sourceTitle": "Models",
+          "sourceUrl": "https://docs.near.ai/cloud/models",
+          "supportingQuote": "models run on NEAR AI's own GPU fleet inside Trusted Execution Environments"
+        }
+      ]
+    },
+    {
+      "id": "ai-agents-and-tool-use",
+      "beat": "ai",
+      "title": "AI Agents and Tool Use",
+      "angleHint": "How agentic systems differ from fixed workflows, and how open protocols standardize tool access.",
+      "facts": [
+        {
+          "id": "ai-agents-and-tool-use-1",
+          "text": "Anthropic defines workflows as systems where LLMs and tools are orchestrated through predefined code paths.",
+          "sourceTitle": "Building effective agents",
+          "sourceUrl": "https://www.anthropic.com/engineering/building-effective-agents",
+          "supportingQuote": "Workflows are systems where LLMs and tools are orchestrated through predefined code paths."
+        },
+        {
+          "id": "ai-agents-and-tool-use-2",
+          "text": "By contrast, Anthropic defines agents as systems where LLMs dynamically direct their own processes and tool usage.",
+          "sourceTitle": "Building effective agents",
+          "sourceUrl": "https://www.anthropic.com/engineering/building-effective-agents",
+          "supportingQuote": "Agents, on the other hand, are systems where LLMs dynamically direct their own processes and tool usage"
+        },
+        {
+          "id": "ai-agents-and-tool-use-3",
+          "text": "The Model Context Protocol is an open-source standard for connecting AI applications to external systems, including data sources and tools.",
+          "sourceTitle": "What is the Model Context Protocol (MCP)?",
+          "sourceUrl": "https://modelcontextprotocol.io/docs/getting-started/intro",
+          "supportingQuote": "MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems."
+        },
+        {
+          "id": "ai-agents-and-tool-use-4",
+          "text": "ReAct is a prompting approach that has language models generate reasoning traces and task-specific actions in an interleaved manner.",
+          "sourceTitle": "ReAct: Synergizing Reasoning and Acting in Language Models",
+          "sourceUrl": "https://arxiv.org/abs/2210.03629",
+          "supportingQuote": "generate both reasoning traces and task-specific actions in an interleaved manner"
+        },
+        {
+          "id": "ai-agents-and-tool-use-5",
+          "text": "The ReAct paper reports that the method outperformed imitation and reinforcement learning baselines by 34 percentage points on ALFWorld and 10 on WebShop.",
+          "sourceTitle": "ReAct: Synergizing Reasoning and Acting in Language Models",
+          "sourceUrl": "https://arxiv.org/abs/2210.03629",
+          "supportingQuote": "ReAct outperforms imitation and reinforcement learning methods by an absolute success rate of 34% and 10% respectively"
+        }
+      ]
+    },
+    {
+      "id": "small-open-weight-models",
+      "beat": "ai",
+      "title": "Small and Open-Weight Models",
+      "angleHint": "Compact and open-weight models are narrowing the capability gap while fitting on phones and small deployments.",
+      "facts": [
+        {
+          "id": "small-open-weight-models-1",
+          "text": "Microsoft's April 2024 Phi-3 technical report introduces phi-3-mini, a 3.8 billion parameter model trained on 3.3 trillion tokens.",
+          "sourceTitle": "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone",
+          "sourceUrl": "https://arxiv.org/abs/2404.14219",
+          "supportingQuote": "We introduce phi-3-mini, a 3.8 billion parameter language model trained on 3.3 trillion tokens"
+        },
+        {
+          "id": "small-open-weight-models-2",
+          "text": "The Phi-3 technical report says phi-3-mini is small enough to be deployed on a phone.",
+          "sourceTitle": "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone",
+          "sourceUrl": "https://arxiv.org/abs/2404.14219",
+          "supportingQuote": "small enough to be deployed on a phone"
+        },
+        {
+          "id": "small-open-weight-models-3",
+          "text": "Phi-3-mini achieves 69 percent on MMLU and 8.38 on MT-bench, according to the April 2024 technical report.",
+          "sourceTitle": "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone",
+          "sourceUrl": "https://arxiv.org/abs/2404.14219",
+          "supportingQuote": "phi-3-mini achieves 69% on MMLU and 8.38 on MT-bench"
+        },
+        {
+          "id": "small-open-weight-models-4",
+          "text": "The July 2024 Llama 3 paper reports that Llama 3 delivers comparable quality to leading language models such as GPT-4 on a plethora of tasks.",
+          "sourceTitle": "The Llama 3 Herd of Models",
+          "sourceUrl": "https://arxiv.org/abs/2407.21783",
+          "supportingQuote": "We find that Llama 3 delivers comparable quality to leading language models such as GPT-4 on a plethora of tasks."
+        },
+        {
+          "id": "small-open-weight-models-5",
+          "text": "Google's 2024 Gemma 2 technical report states that the models offer competitive alternatives to models two to three times bigger.",
+          "sourceTitle": "Gemma 2: Improving Open Language Models at a Practical Size",
+          "sourceUrl": "https://arxiv.org/abs/2408.00118",
+          "supportingQuote": "competitive alternatives to models that are 2-3 times bigger."
+        }
+      ]
+    },
+    {
+      "id": "stablecoin-payment-rails",
+      "beat": "markets",
+      "title": "Stablecoins as Payment Rails",
+      "angleHint": "What stablecoins promise for payments, how U.S. rules require backing, and where the BIS sees structural flaws.",
+      "facts": [
+        {
+          "id": "stablecoin-payment-rails-1",
+          "text": "The St. Louis Fed defines a payment stablecoin as a digital asset issued on a public blockchain for payment and settlement purposes.",
+          "sourceTitle": "Regulated Payment Stablecoins Become a Reality in the U.S.",
+          "sourceUrl": "https://www.stlouisfed.org/on-the-economy/2025/dec/regulated-payment-stablecoins-become-reality-us",
+          "supportingQuote": "a digital asset issued on a public blockchain designed for payment and settlement purposes."
+        },
+        {
+          "id": "stablecoin-payment-rails-2",
+          "text": "Under the U.S. GENIUS Act, issuers are required to hold reserves on at least a one-to-one basis against the value of coins issued.",
+          "sourceTitle": "Regulated Payment Stablecoins Become a Reality in the U.S.",
+          "sourceUrl": "https://www.stlouisfed.org/on-the-economy/2025/dec/regulated-payment-stablecoins-become-reality-us",
+          "supportingQuote": "Issuers are required to hold assets (reserves) on at least a one-to-one basis against the value of the coins issued."
+        },
+        {
+          "id": "stablecoin-payment-rails-3",
+          "text": "Authorized issuers of payment stablecoins are required to redeem them for a fixed amount of money.",
+          "sourceTitle": "Regulated Payment Stablecoins Become a Reality in the U.S.",
+          "sourceUrl": "https://www.stlouisfed.org/on-the-economy/2025/dec/regulated-payment-stablecoins-become-reality-us",
+          "supportingQuote": "Authorized issuers of payment stablecoins are required to redeem them for a fixed amount of money"
+        },
+        {
+          "id": "stablecoin-payment-rails-4",
+          "text": "The BIS concluded in June 2026 that stablecoins in their current form fall short on key properties of money and have structural flaws.",
+          "sourceTitle": "The path to the next-generation monetary and financial system lies in safeguarding trust in money",
+          "sourceUrl": "https://www.bis.org/press/p260623.htm",
+          "supportingQuote": "Their current form, however, falls short on key properties of money and has structural flaws."
+        },
+        {
+          "id": "stablecoin-payment-rails-5",
+          "text": "The BIS defines singleness as the ability to redeem different forms of money exactly at par in exchange for central bank money.",
+          "sourceTitle": "The path to the next-generation monetary and financial system lies in safeguarding trust in money",
+          "sourceUrl": "https://www.bis.org/press/p260623.htm",
+          "supportingQuote": "singleness, or the ability to redeem different forms of money exactly at par in exchange for central bank money"
+        }
+      ]
+    },
+    {
+      "id": "tokenized-settlement-project-agora",
+      "beat": "markets",
+      "title": "Tokenized Settlement: Project Agorá",
+      "angleHint": "A BIS-led experiment tests tokenized central bank reserves and commercial bank deposits on a shared platform.",
+      "facts": [
+        {
+          "id": "tokenized-settlement-project-agora-1",
+          "text": "Project Agorá is a BIS public-private collaboration testing a multi-currency shared programmable platform for wholesale cross-border payments.",
+          "sourceTitle": "Project Agorá",
+          "sourceUrl": "https://www.bis.org/project/agora",
+          "supportingQuote": "multi-currency shared programmable platform for wholesale cross-border payments."
+        },
+        {
+          "id": "tokenized-settlement-project-agora-2",
+          "text": "Project Agorá examines whether tokenisation of wholesale central bank money and commercial bank deposits on programmable platforms can improve the monetary system.",
+          "sourceTitle": "Project Agorá: central banks and banking sector embark on major project to explore tokenisation of cross-border payments",
+          "sourceUrl": "https://www.bis.org/media-releases/20240403-project-agora-central-banks-and-banking-sector-embark-major-project-explore-tokenisation-cross",
+          "supportingQuote": "tokenisation of wholesale central bank money and commercial bank deposits on programmable platforms can improve the monetary system."
+        },
+        {
+          "id": "tokenized-settlement-project-agora-3",
+          "text": "In April 2024, the BIS and seven central banks announced Project Agorá to explore tokenisation of cross-border payments.",
+          "sourceTitle": "Project Agorá: central banks and banking sector embark on major project to explore tokenisation of cross-border payments",
+          "sourceUrl": "https://www.bis.org/media-releases/20240403-project-agora-central-banks-and-banking-sector-embark-major-project-explore-tokenisation-cross",
+          "supportingQuote": "The Bank for International Settlements (BIS) together with seven central banks"
+        },
+        {
+          "id": "tokenized-settlement-project-agora-4",
+          "text": "Twenty-eight financial institutions and central banks across Asia, Europe, and North America took part in Project Agorá's July 2026 real-value testing.",
+          "sourceTitle": "Project Agorá",
+          "sourceUrl": "https://www.bis.org/project/agora",
+          "supportingQuote": "Twenty-eight financial institutions and central banks across Asia, Europe and North America"
+        },
+        {
+          "id": "tokenized-settlement-project-agora-5",
+          "text": "Project Agorá's July 2026 real-value testing recorded an average time from payment initiation to settlement of approximately 80 seconds.",
+          "sourceTitle": "Project Agorá",
+          "sourceUrl": "https://www.bis.org/project/agora",
+          "supportingQuote": "the average time from payment initiation to settlement was approximately 80 seconds."
+        }
+      ]
+    }
+  ]
+}
