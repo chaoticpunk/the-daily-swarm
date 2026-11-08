@@ -1,0 +1,10 @@
+# Never upload local secrets or planning notes to a deployment.
+.env
+.env.*
+!.env.example
+DEV-BRIEF.md
+.vercel
+node_modules
+.next
+coverage
+*.tsbuildinfo
