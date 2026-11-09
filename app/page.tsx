@@ -155,6 +155,11 @@ export default function HomePage() {
             </li>
           ))}
         </ol>
+        <p className="mt-4 max-w-2xl text-xs leading-relaxed text-ink-soft">
+          Watch it happen on the <Link className="ink-underline" href="/newsroom">newsroom wire</Link>:
+          every pitch, commission, pass, filed draft, and fact-check dispatch is
+          printed as the desks return it. Nothing on the wire is pre-written.
+        </p>
       </section>
 
       <section className="grid gap-10 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">

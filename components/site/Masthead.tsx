@@ -9,7 +9,7 @@ export function Masthead() {
   const editionDate = getDemoEditionDate();
 
   return (
-    <header className="border-b-2 border-ink">
+    <header className="border-b-2 border-ink print:hidden">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-b border-rule-soft py-2">
           <p className="news-caps text-[10px] text-ink-soft">Vol. I · No. 1</p>

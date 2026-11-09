@@ -79,6 +79,16 @@ describe("agent response schemas", () => {
     expect(result.success).toBe(false);
   });
 
+  it("allows a longer editor note under the hard ceiling", () => {
+    const note = (length: number) => ({
+      editor_note: "x".repeat(length),
+      front_page_order: ["one", "two"],
+      pull_quote: "A quote from a story.",
+    });
+    expect(editorNoteResponseSchema.safeParse(note(320)).success).toBe(true);
+    expect(editorNoteResponseSchema.safeParse(note(321)).success).toBe(false);
+  });
+
   it("validates a complete edition", () => {
     const story = {
       id: "story-1",

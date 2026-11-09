@@ -259,3 +259,29 @@ export interface StageState {
   detail?: string;
   error?: ApiErrorBody["error"];
 }
+
+export type WireEventKind =
+  | "open"
+  | "pitch"
+  | "commission"
+  | "pass"
+  | "draft"
+  | "check"
+  | "revision"
+  | "recheck"
+  | "publish"
+  | "stop";
+
+/**
+ * One line on the newsroom wire. Every message is derived from an actual
+ * agent response or from the browser's own orchestration step; nothing is
+ * pre-filled or generated for display.
+ */
+export interface WireEvent {
+  id: string;
+  at: number;
+  kind: WireEventKind;
+  agentId?: string;
+  message: string;
+  detail?: string;
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import { AGENT_CONFIG, STAGE_LABELS } from "@/lib/config";
+import { AGENT_CONFIG, getAgentConfig, STAGE_LABELS } from "@/lib/config";
 import { getDemoEditionDate } from "@/lib/content/pack";
 import type {
   Agent,
@@ -16,6 +16,7 @@ import type {
   StageId,
   StageState,
   Story,
+  WireEvent,
 } from "@/lib/types";
 import type {
   BalancesApiResponse,
@@ -27,7 +28,7 @@ import type {
   WriteApiResponse,
 } from "@/lib/api/types";
 import { saveEdition } from "@/lib/storage";
-import { makeId } from "@/lib/utils";
+import { formatNear, makeId } from "@/lib/utils";
 
 const STAGE_ORDER: StageId[] = [
   "pitches",
@@ -49,6 +50,7 @@ interface StageResult {
 interface NewsroomState {
   agents: Agent[];
   stages: StageState[];
+  wire: WireEvent[];
   pitches: Pitch[];
   assignments: Assignment[];
   rejected: RejectedPitch[];
@@ -162,6 +164,7 @@ function initialStages(): StageState[] {
 type RunState = Pick<
   NewsroomState,
   | "stages"
+  | "wire"
   | "pitches"
   | "assignments"
   | "rejected"
@@ -184,6 +187,7 @@ type RunState = Pick<
 function initialRunState(): RunState {
   return {
     stages: initialStages(),
+    wire: [],
     pitches: [],
     assignments: [],
     rejected: [],
@@ -230,6 +234,15 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
     }));
   };
 
+  const pushWire = (event: Omit<WireEvent, "id" | "at">) => {
+    set((state) => ({
+      wire: [
+        ...state.wire,
+        { ...event, id: makeId("wire"), at: Date.now() },
+      ],
+    }));
+  };
+
   const setAllAgents = (status: AgentStatus) => {
     set((state) => ({
       agents: state.agents.map((agent) => ({
@@ -260,6 +273,12 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
         });
         set((state) => ({ pitches: [...state.pitches, data.pitch] }));
         setAgent(reporter.id, { status: "idle" });
+        pushWire({
+          kind: "pitch",
+          agentId: reporter.id,
+          message: `Files a pitch: “${data.pitch.headline}”.`,
+          detail: `${formatNear(data.pitch.requestedFee)} NEAR · ${data.pitch.wordCount} words · ${data.pitch.claims.length} sourced claims`,
+        });
         return data.pitch;
       }),
     );
@@ -290,6 +309,25 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
         return agent;
       }),
     }));
+    for (const assignment of data.assignments) {
+      const pitch = get().pitches.find((item) => item.id === assignment.pitchId);
+      const reporter = getAgentConfig(assignment.agentId);
+      pushWire({
+        kind: "commission",
+        agentId: "editor",
+        message: `Commissions “${pitch?.headline ?? assignment.pitchId}”.`,
+        detail: `${reporter?.name ?? assignment.agentId} · ${formatNear(assignment.fee)} NEAR · ${assignment.wordCount} words`,
+      });
+    }
+    for (const rejection of data.rejected) {
+      const pitch = get().pitches.find((item) => item.id === rejection.pitchId);
+      pushWire({
+        kind: "pass",
+        agentId: "editor",
+        message: `Passes on “${pitch?.headline ?? rejection.pitchId}”.`,
+        detail: rejection.reason,
+      });
+    }
     return {
       detail: `2 commissioned · 1 passed · ${data.totalCost.toFixed(4)} NEAR commissioned`,
     };
@@ -323,6 +361,12 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
         set((state) => ({
           drafts: { ...state.drafts, [assignment.pitchId]: data.draft },
         }));
+        pushWire({
+          kind: "draft",
+          agentId: assignment.agentId,
+          message: `Files “${data.draft.headline}”.`,
+          detail: `${data.draft.wordCount} words · ${data.draft.claims.length} sourced claims`,
+        });
       }),
     );
 
@@ -357,6 +401,18 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
         set((state) => ({
           factChecks: { ...state.factChecks, [assignment.pitchId]: data.factCheck },
         }));
+        const supported = data.factCheck.checks.filter(
+          (check) => check.verdict === "supported",
+        ).length;
+        pushWire({
+          kind: "check",
+          agentId: "fact-checker",
+          message:
+            data.factCheck.overall === "pass"
+              ? `Clears “${draft.headline}”.`
+              : `Requests a revision of “${draft.headline}”.`,
+          detail: `${supported} supported · ${data.factCheck.checks.length - supported} flagged · ${data.factCheck.checks.length} checks`,
+        });
       }),
     );
 
@@ -403,6 +459,12 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
             [assignment.pitchId]: data.draft,
           },
         }));
+        pushWire({
+          kind: "revision",
+          agentId: assignment.agentId,
+          message: `Files a revision of “${data.draft.headline}”.`,
+          detail: `${data.draft.wordCount} words · ${data.draft.claims.length} sourced claims`,
+        });
       }),
     );
 
@@ -437,6 +499,18 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
         set((state) => ({
           rechecks: { ...state.rechecks, [assignment.pitchId]: data.factCheck },
         }));
+        const supported = data.factCheck.checks.filter(
+          (check) => check.verdict === "supported",
+        ).length;
+        pushWire({
+          kind: "recheck",
+          agentId: "fact-checker",
+          message:
+            data.factCheck.overall === "pass"
+              ? `Clears the revision of “${draft.headline}”.`
+              : `Still flags “${draft.headline}”.`,
+          detail: `${supported} supported · ${data.factCheck.checks.length - supported} flagged · ${data.factCheck.checks.length} checks`,
+        });
       }),
     );
 
@@ -514,6 +588,14 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
         ? undefined
         : "This browser could not save the edition to local storage. Keep this tab open, or the edition link will not work.",
     });
+    const lead =
+      stories.find((story) => story.id === data.frontPageOrder[0]) ?? stories[0];
+    pushWire({
+      kind: "publish",
+      agentId: "editor",
+      message: "Sets the front page and publishes the edition.",
+      detail: `Lead: “${(lead?.revisedDraft ?? lead?.draft)?.headline ?? "—"}” · ${stories.length} stories`,
+    });
     setAllAgents("done");
     return { detail: "Edition published" };
   };
@@ -572,6 +654,11 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
           status: "error",
           durationMs: Date.now() - started,
           error: apiError,
+        });
+        pushWire({
+          kind: "stop",
+          message: `Stops the edition at “${STAGE_LABELS[stageId]}”.`,
+          detail: apiError.message,
         });
         set((state) => ({
           phase: "error",
@@ -642,6 +729,11 @@ export const useNewsroomStore = create<NewsroomStore>((set, get) => {
           ...initialRunState(),
           agents: get().agents.map((agent) => ({ ...agent, status: "idle" })),
           phase: "running",
+        });
+        pushWire({
+          kind: "open",
+          agentId: "editor",
+          message: "Calls the desks to order for today's edition.",
         });
         await executePipeline(0);
       },

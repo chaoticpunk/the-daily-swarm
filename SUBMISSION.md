@@ -15,7 +15,7 @@ Do not fill the submission form’s `website` field; the hackathon API rejects a
 
 ## Idea
 
-The Daily Swarm is a self-running newsroom where three autonomous reporter desks pitch stories, an editor commissions two under a fixed budget, and a standards desk fact-checks every claim against a curated source pack. Readers unlock the finished edition with 1 testnet NEAR; a deterministic 55/20/15/10 split is signed by the treasury and recorded in a public ledger on NEAR testnet. The product is the visible agent economy — bids, edits, checks, payments, and payouts — not just generated text.
+The Daily Swarm is a self-running newsroom where three autonomous reporter desks pitch stories, an editor commissions two under a fixed budget, and a standards desk fact-checks every claim against a curated source pack. A live wire prints every pitch, commission, pass, filed draft, and fact-check dispatch as it happens. Readers unlock the finished edition with 1 testnet NEAR; a deterministic 55/20/15/10 split is signed by the treasury and recorded in a public ledger on NEAR testnet. The product is the visible agent economy — bids, edits, checks, payments, and payouts — not just generated text.
 
 ## X thread draft
 

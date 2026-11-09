@@ -264,7 +264,7 @@ ${JSON.stringify(
 
 Return JSON:
 {
-  "editor_note": "<= 220 characters, one paragraph",
+  "editor_note": "one paragraph, <= 240 characters (hard maximum 300)",
   "front_page_order": ["story_id", "story_id"],
   "pull_quote": "<= 140 characters, must come from one story"
 }`,

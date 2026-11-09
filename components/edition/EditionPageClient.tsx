@@ -345,16 +345,27 @@ export function EditionPageClient() {
             {editionDateLabel(edition.date)}
           </p>
           <p className="news-caps text-[9px] text-ink-soft">{SITE.demoLabel}</p>
-          <p
-            className={
-              unlocked
-                ? "news-caps bg-success/10 px-2 py-1 text-[9px] text-success"
-                : "news-caps bg-gold/30 px-2 py-1 text-[9px] text-ink"
-            }
-            role="status"
-          >
-            {unlocked ? "Paid · unlocked" : "Published · locked"}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p
+              className={
+                unlocked
+                  ? "news-caps bg-success/10 px-2 py-1 text-[9px] text-success"
+                  : "news-caps bg-gold/30 px-2 py-1 text-[9px] text-ink"
+              }
+              role="status"
+            >
+              {unlocked ? "Paid · unlocked" : "Published · locked"}
+            </p>
+            {unlocked ? (
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="news-caps border border-ink px-2.5 py-1 text-[8px] hover:border-accent hover:text-accent-deep print:hidden"
+              >
+                Print edition
+              </button>
+            ) : null}
+          </div>
         </div>
 
         <div className="mt-5 grid gap-5 lg:grid-cols-12 lg:items-end">
@@ -373,7 +384,7 @@ export function EditionPageClient() {
             {!unlocked ? (
               <a
                 href="#unlock"
-                className="news-caps mt-4 inline-flex bg-ink px-4 py-2.5 text-[10px] text-newsprint hover:bg-accent-deep"
+                className="news-caps mt-4 inline-flex bg-ink px-4 py-2.5 text-[10px] text-newsprint hover:bg-accent-deep print:hidden"
               >
                 Unlock with {READER_PRICE_NEAR} testnet NEAR ↓
               </a>
@@ -398,7 +409,7 @@ export function EditionPageClient() {
       {storageWarning ? (
         <p
           role="alert"
-          className="mt-4 border-l-4 border-gold bg-gold/15 px-4 py-3 text-xs leading-relaxed"
+          className="mt-4 border-l-4 border-gold bg-gold/15 px-4 py-3 text-xs leading-relaxed print:hidden"
         >
           {storageWarning}
         </p>
@@ -407,7 +418,7 @@ export function EditionPageClient() {
       {pendingNotice ? (
         <p
           role="status"
-          className="mt-4 border-l-4 border-gold bg-gold/15 px-4 py-3 text-xs leading-relaxed"
+          className="mt-4 border-l-4 border-gold bg-gold/15 px-4 py-3 text-xs leading-relaxed print:hidden"
         >
           {pendingNotice}
         </p>
@@ -526,7 +537,10 @@ export function EditionPageClient() {
           </section>
         </div>
 
-        <aside id="unlock" className="min-w-0 scroll-mt-6 lg:col-span-4">
+        <aside
+          id="unlock"
+          className="min-w-0 scroll-mt-6 lg:col-span-4 print:hidden"
+        >
           <div className="space-y-4 lg:sticky lg:top-4">
             {unlocked ? (
               <PaymentReceipt

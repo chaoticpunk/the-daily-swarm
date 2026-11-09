@@ -25,6 +25,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://the-daily-swarm.vercel.app"),
   title: {
     default: "The Daily Swarm — a working newsroom with a public ledger",
     template: "%s · The Daily Swarm",

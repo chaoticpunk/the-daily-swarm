@@ -46,6 +46,15 @@ export function StoryArticle({
   const agent = getAgentConfig(story.assignment.agentId);
   const status = factStatus(story);
   const finalCheck = story.recheck ?? story.factCheck;
+  const supportedCount = finalCheck.checks.filter(
+    (check) => check.verdict === "supported",
+  ).length;
+  const unsupportedCount = finalCheck.checks.filter(
+    (check) => check.verdict === "unsupported",
+  ).length;
+  const contextCount = finalCheck.checks.filter(
+    (check) => check.verdict === "needs_context",
+  ).length;
   const sources = [
     ...new Map(
       finalDraft.claims
@@ -116,39 +125,65 @@ export function StoryArticle({
             </p>
           ) : null}
 
-          <div className="mt-6 grid gap-4 border-t border-rule pt-4 md:grid-cols-2">
-            <details className="group">
-              <summary className="news-caps cursor-pointer list-none text-[9px] text-ink-soft hover:text-accent-deep">
-                Fact-check report · {finalCheck.checks.length} checks{" "}
-                <span aria-hidden="true" className="group-open:hidden">
-                  +
-                </span>
-              </summary>
-              <ul className="mt-3 space-y-2.5">
-                {finalCheck.checks.map((check, index) => (
-                  <li key={`${story.id}-fc-${index}`} className="text-xs">
-                    <div className="flex items-start gap-2">
-                      <span
-                        className={cn(
-                          "news-caps mt-0.5 shrink-0 px-1.5 py-0.5 text-[7px]",
-                          VERDICT_STYLE[check.verdict],
-                        )}
-                      >
-                        {VERDICT_LABEL[check.verdict]}
-                      </span>
-                      <p className="leading-snug">{check.claim}</p>
-                    </div>
-                    <p className="mt-1 pl-1 text-[10px] leading-snug text-ink-soft">
-                      {check.note}{" "}
-                      <span className="ledger-num text-accent-deep">
-                        [{check.sourceId}]
-                      </span>
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </details>
+          <section
+            aria-label="Standards desk fact-check"
+            className="mt-6 border-t-2 border-ink pt-4"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+              <div>
+                <p className="news-caps text-[9px] text-accent-deep">
+                  The standards desk
+                </p>
+                <p className="ledger-num mt-1 text-[9px] leading-snug text-ink-soft">
+                  {finalCheck.checks.length} checks · {supportedCount} supported ·{" "}
+                  {unsupportedCount} flagged
+                  {contextCount > 0 ? ` · ${contextCount} need context` : ""}
+                </p>
+              </div>
+              <span
+                className={cn(
+                  "stamp",
+                  status.tone === "ok"
+                    ? "text-success"
+                    : status.tone === "warn"
+                      ? "text-ink-soft"
+                      : "text-accent",
+                )}
+              >
+                {status.tone === "ok"
+                  ? "Verified"
+                  : status.tone === "warn"
+                    ? "Re-check pending"
+                    : "Flagged"}
+              </span>
+            </div>
 
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {finalCheck.checks.map((check, index) => (
+                <li key={`${story.id}-fc-${index}`} className="paper-inset p-2.5">
+                  <div className="flex items-start gap-2">
+                    <span
+                      className={cn(
+                        "news-caps mt-0.5 shrink-0 px-1.5 py-0.5 text-[7px]",
+                        VERDICT_STYLE[check.verdict],
+                      )}
+                    >
+                      {VERDICT_LABEL[check.verdict]}
+                    </span>
+                    <p className="text-[11px] leading-snug">{check.claim}</p>
+                  </div>
+                  <p className="mt-1.5 text-[10px] leading-snug text-ink-soft">
+                    {check.note}{" "}
+                    <span className="ledger-num text-accent-deep">
+                      [{check.sourceId}]
+                    </span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <div className="mt-4 grid gap-4 border-t border-rule pt-4 md:grid-cols-2">
             <details className="group">
               <summary className="news-caps cursor-pointer list-none text-[9px] text-ink-soft hover:text-accent-deep">
                 Sources · {sources.length} cited{" "}
@@ -174,40 +209,43 @@ export function StoryArticle({
                 ))}
               </ul>
             </details>
-          </div>
 
-          <details className="group mt-3 border-t border-rule-soft pt-3">
-            <summary className="news-caps cursor-pointer list-none text-[9px] text-ink-soft hover:text-accent-deep">
-              Every claim mapped to a source{" "}
-              <span aria-hidden="true" className="group-open:hidden">
-                +
-              </span>
-            </summary>
-            <ul className="mt-2 space-y-1.5">
-              {finalDraft.claims.map((claim, index) => {
-                const fact = getFactById(claim.sourceId);
-                return (
-                  <li key={`${story.id}-claim-${index}`} className="text-xs leading-snug">
-                    {claim.text}{" "}
-                    {fact ? (
-                      <a
-                        href={fact.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="ledger-num text-[9px] text-accent-deep underline decoration-rule"
-                      >
-                        [{claim.sourceId}] ↗
-                      </a>
-                    ) : (
-                      <span className="ledger-num text-[9px] text-accent-deep">
-                        [{claim.sourceId}]
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </details>
+            <details className="group">
+              <summary className="news-caps cursor-pointer list-none text-[9px] text-ink-soft hover:text-accent-deep">
+                Every claim mapped to a source{" "}
+                <span aria-hidden="true" className="group-open:hidden">
+                  +
+                </span>
+              </summary>
+              <ul className="mt-2 space-y-1.5">
+                {finalDraft.claims.map((claim, index) => {
+                  const fact = getFactById(claim.sourceId);
+                  return (
+                    <li
+                      key={`${story.id}-claim-${index}`}
+                      className="text-xs leading-snug"
+                    >
+                      {claim.text}{" "}
+                      {fact ? (
+                        <a
+                          href={fact.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="ledger-num text-[9px] text-accent-deep underline decoration-rule"
+                        >
+                          [{claim.sourceId}] ↗
+                        </a>
+                      ) : (
+                        <span className="ledger-num text-[9px] text-accent-deep">
+                          [{claim.sourceId}]
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </details>
+          </div>
         </>
       ) : (
         <div className="relative mt-6">

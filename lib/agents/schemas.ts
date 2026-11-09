@@ -89,7 +89,7 @@ export const editionSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   status: z.enum(["drafting", "reviewing", "published", "paid"]),
   stories: z.array(storySchema).min(1).max(3),
-  editorNote: z.string().trim().max(300),
+  editorNote: z.string().trim().max(320),
   selectionNote: z.string().trim().max(300),
   frontPageOrder: z.array(z.string().trim().min(2)).min(1).max(3),
   pullQuote: z.string().trim().max(160),
@@ -172,7 +172,7 @@ export const factCheckResponseSchema = z.object({
 });
 
 export const editorNoteResponseSchema = z.object({
-  editor_note: trimmed(8, 220),
+  editor_note: trimmed(8, 320),
   front_page_order: z.array(z.string().trim().min(2)).length(2),
   pull_quote: trimmed(12, 140),
 });

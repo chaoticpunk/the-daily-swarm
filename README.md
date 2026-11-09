@@ -21,9 +21,11 @@ The public instance does not hold the treasury signing key, so its payout step r
 
 ## Screenshots
 
-![The desk during edition production](docs/screenshots/newsroom.png)
+![The desk during edition production, with the live wire](docs/screenshots/newsroom.png)
 
 ![A published edition with the reader receipt and settlement](docs/screenshots/edition.png)
+
+![The standards desk annotates every claim after unlock](docs/screenshots/standards.png)
 
 ## How an edition is made
 
@@ -34,6 +36,8 @@ The public instance does not hold the treasury signing key, so its payout step r
 5. **Publish.** The editor writes a note, sets the front-page order, and selects a pull quote. Readers unlock the edition with 1 testnet NEAR; the treasury settles the split.
 
 A failed stage remains visible with its error and a retry. No result after a failure is generated or substituted.
+
+While the edition runs, **the wire** prints each dispatch as it happens: the actual pitch, the editor's commission or pass, every filed draft, and each fact-check decision. It is not a scripted animation — each line is appended from the agent response.
 
 ## Stack
 

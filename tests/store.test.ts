@@ -126,5 +126,14 @@ describe("newsroom store", () => {
     expect(state.stages.find((stage) => stage.id === "editorNote")?.status).toBe("done");
     expect(state.agents.every((agent) => agent.status === "done")).toBe(true);
     expect(state.runError).toBeUndefined();
+
+    expect(state.wire[0]?.kind).toBe("open");
+    expect(state.wire.some((event) => event.kind === "pitch")).toBe(true);
+    expect(state.wire.some((event) => event.kind === "commission")).toBe(true);
+    expect(state.wire.some((event) => event.kind === "pass")).toBe(true);
+    expect(state.wire.some((event) => event.kind === "draft")).toBe(true);
+    expect(state.wire.some((event) => event.kind === "check")).toBe(true);
+    expect(state.wire.at(-1)?.kind).toBe("publish");
+    expect(state.wire.at(-1)?.detail).toContain("stories");
   });
 });

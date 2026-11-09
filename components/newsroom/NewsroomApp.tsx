@@ -7,6 +7,7 @@ import { BidBoard } from "@/components/newsroom/BidBoard";
 import { FactCheckPanel } from "@/components/newsroom/FactCheckPanel";
 import { FrontPagePreview } from "@/components/newsroom/FrontPagePreview";
 import { RunProgress } from "@/components/newsroom/RunProgress";
+import { WireFeed } from "@/components/newsroom/WireFeed";
 import { EDITOR_BUDGET, READER_PRICE_NEAR, REVENUE_SHARES } from "@/lib/config";
 import { sourcePack } from "@/lib/content/pack";
 import { useNewsroomStore } from "@/lib/store/newsroom";
@@ -19,6 +20,7 @@ import {
 export function NewsroomApp() {
   const agents = useNewsroomStore((state) => state.agents);
   const stages = useNewsroomStore((state) => state.stages);
+  const wire = useNewsroomStore((state) => state.wire);
   const pitches = useNewsroomStore((state) => state.pitches);
   const assignments = useNewsroomStore((state) => state.assignments);
   const rejected = useNewsroomStore((state) => state.rejected);
@@ -140,6 +142,8 @@ export function NewsroomApp() {
         onReset={reset}
       />
 
+      <WireFeed events={wire} running={phase === "running"} />
+
       {balancesError ? (
         <div
           role="alert"
@@ -160,20 +164,23 @@ export function NewsroomApp() {
       ) : null}
 
       {nearConfig && !nearConfig.treasuryConfigured ? (
-        <div
-          role="note"
-          className="mt-4 border-l-4 border-gold bg-gold/15 px-4 py-3"
-        >
-          <p className="news-caps text-[9px] text-ink">
-            Settlement signer not configured
-          </p>
-          <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+        <details className="group mt-4 border-l-4 border-gold bg-gold/15 px-4 py-2">
+          <summary className="news-caps cursor-pointer list-none text-[9px] text-ink">
+            Settlement signer not configured · local accounting only{" "}
+            <span aria-hidden="true" className="group-open:hidden">
+              +
+            </span>
+            <span aria-hidden="true" className="hidden group-open:inline">
+              −
+            </span>
+          </summary>
+          <p className="mt-2 text-xs leading-relaxed text-ink-soft">
             Balances and reader-access verification can still be live, but without{" "}
             <span className="ledger-num">NEAR_TREASURY_PRIVATE_KEY</span> the revenue
             split is recorded as local accounting only. Local entries are never shown
             as on-chain transfers.
           </p>
-        </div>
+        </details>
       ) : null}
 
       <div className="grid gap-8 py-8 lg:grid-cols-12 lg:gap-7">
