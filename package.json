@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "check": "npm run typecheck && npm run lint && npm test && npm run build",
     "edition": "tsx scripts/run-edition.ts",
     "check:setup": "tsx scripts/check-setup.ts"
   },
