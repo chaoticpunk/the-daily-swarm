@@ -19,16 +19,18 @@ The form allows selecting multiple tracks. The official FAQ says: “Select ever
 
 The live demo is not a separate form field: <https://the-daily-swarm.vercel.app>
 The no-wallet sample edition: <https://the-daily-swarm.vercel.app/sample>
+The product brief: <https://the-daily-swarm.vercel.app/about>
 
 Demo post requirements: public X post; say you built it at NEAR HACKATHON; tag `@NEARProtocol` and `#NEARHackathon`; attach the video or screenshots. The first tweet must contain the video and the live URL.
 
 ## What did you build? (copy-paste, 20–2,000 characters)
 
 ```text
-The Daily Swarm is an autonomous newsroom with a public ledger. Three reporter desks pitch stories with a fee and word count; an editor commissions two under a fixed budget and records why the third was passed; a standards desk checks every claim against a curated source pack and forces one revision when a claim is unsupported. A live wire prints every pitch, commission, draft, and fact-check as it happens. Readers unlock the finished edition with 1 testnet NEAR; a deterministic 55/20/15/10 split settles to agent sub-accounts on NEAR testnet. The repo includes a read-only sample edition, 48 tests, and real testnet explorer links for a reader payment and all four transfers. The public deployment verifies reader payments against the testnet RPC but does not hold the treasury signing key, so its payout rows are labeled LOCAL · NOT ON-CHAIN.
+The Daily Swarm is an auditable AI newsroom for a niche beat. Three reporter agents pitch stories with a fee and word count; an editor commissions two under a fixed budget and records why the third was passed; a standards desk checks every claim against a source pack and forces one revision when a claim is unsupported. A live wire prints every dispatch. Readers unlock the edition with 1 testnet NEAR; a deterministic 55/20/15/10 split settles to agent sub-accounts on NEAR testnet. The prototype proves the full loop — source-grounded writing, independent checks, reader payment, and a public ledger. The repo includes a no-wallet sample edition, 48 tests, and real testnet explorer links for a reader payment and all four transfers. The product path — live primary-source ingestion, human review, shareable editions, subscriptions, and an audit API — is in docs/PRODUCT.md. The public deployment verifies payments on the testnet RPC but does not hold the treasury signing key, so its payout rows are labeled LOCAL · NOT ON-CHAIN.
 
 Live demo: https://the-daily-swarm.vercel.app
 Sample (no wallet): https://the-daily-swarm.vercel.app/sample
+Product brief: https://the-daily-swarm.vercel.app/about
 Repo: https://github.com/chaoticpunk/the-daily-swarm
 ```
 
@@ -41,7 +43,7 @@ Repo: https://github.com/chaoticpunk/the-daily-swarm
 | `npm test` | 48 tests · 8 files |
 | `npm run build` | pass · 20 route entries, including `/sample` |
 | Fresh worktree, no `.env.local` | `npm ci` + `npm test` + `npm run build` pass |
-| Live routes `/`, `/sample`, `/newsroom`, `/ledger` | HTTP 200 |
+| Live routes `/`, `/about`, `/sample`, `/newsroom`, `/ledger` | HTTP 200 |
 | Live `/api/health` | `ok:true`, LLM configured, NEAR testnet, `payoutsReady:false` |
 | Live `/api/agent/pitch` | HTTP 200 · `Qwen/Qwen3.8-27B` · 7.1s |
 | Vercel Production env | `NEARAI_CLOUD_API_KEY` set; **no `NEAR_TREASURY_PRIVATE_KEY`** |

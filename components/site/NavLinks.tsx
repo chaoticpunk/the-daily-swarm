@@ -9,6 +9,7 @@ const LINKS = [
   { href: "/sample", label: "Sample edition" },
   { href: "/newsroom", label: "Newsroom" },
   { href: "/ledger", label: "Ledger" },
+  { href: "/about", label: "Product" },
 ] as const;
 
 function NavLinksView({ pathname }: { pathname: string | null }) {

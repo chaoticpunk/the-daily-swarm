@@ -8,7 +8,7 @@
 
 **Sample edition (no wallet):** <https://the-daily-swarm.vercel.app/sample>
 
-An autonomous newsroom with a public ledger.
+An autonomous, auditable newsroom with a public ledger.
 
 Three desks pitch stories. An editor commissions two. A standards desk checks every claim. Readers unlock the edition with 1 testnet NEAR, and the revenue split settles on NEAR.
 
@@ -30,6 +30,7 @@ A read-only [sample edition](https://the-daily-swarm.vercel.app/sample) is avail
 - **Live pipeline:** open the [newsroom](https://the-daily-swarm.vercel.app/newsroom) and click “Produce today's edition”. The wire prints each dispatch. The edition unlocks with 1 testnet NEAR; [docs/JUDGING.md](docs/JUDGING.md) covers the wallet and manual-verification paths.
 - **Run the code:** `npm ci && npm run check` runs typecheck, lint, the test suite, and a production build without any secrets. A fresh clone with no `.env.local` also passes `npm test` and `npm run build`.
 - **On-chain evidence:** [Testnet transactions](#testnet-transactions) has a real reader payment and all four transfers on the testnet explorer.
+- **Product brief:** the [Product page](https://the-daily-swarm.vercel.app/about) covers the users, business model, and roadmap. The current build is the auditable demo; the path to live news is in [docs/PRODUCT.md](docs/PRODUCT.md).
 - **Honest limits:** the public instance does not hold the treasury signing key, so live payout rows are local accounting; editions are stored in the browser. See [Limitations](#limitations).
 
 ## Screenshots
@@ -51,6 +52,14 @@ A read-only [sample edition](https://the-daily-swarm.vercel.app/sample) is avail
 A failed stage remains visible with its error and a retry. No result after a failure is generated or substituted.
 
 While the edition runs, **the wire** prints each dispatch as it happens: the actual pitch, the editor's commission or pass, every filed draft, and each fact-check decision. It is not a scripted animation — each line is appended from the agent response.
+
+## Product
+
+The Daily Swarm is an auditable AI newsroom for a niche beat, not a fully autonomous global newsroom. The prototype proves the full loop — source-grounded writing, independent checks, reader payment, and a public ledger. The path from the curated demo to live news is in [docs/PRODUCT.md](docs/PRODUCT.md): live primary-source ingestion, a human review console, shareable editions, subscriptions, and a B2B audit API.
+
+- Product brief: <https://the-daily-swarm.vercel.app/about>
+- Demo vs product: the source pack is curated today; Phase 2 replaces it with a source-pack builder that ingests primary sources and snapshots them.
+- The newsroom is the content; the audit trail is the trust layer.
 
 ## Stack
 
@@ -127,6 +136,7 @@ Only the treasury key is needed server-side. Desk accounts only receive funds. S
 | Route | Method | Purpose |
 | --- | --- | --- |
 | `/` | GET | Front page and product overview |
+| `/about` | GET | Product brief: users, real-vs-demo, roadmap, business model |
 | `/sample` | GET | Read-only sample edition; no wallet or payment |
 | `/newsroom` | GET | Produce an edition; pitches, commissions, workflow, checks |
 | `/edition/[id]` | GET | Published edition, reader access, receipt, settlement |
@@ -217,6 +227,6 @@ Built for **NEAR Hackathon 2026**. Primary track: `swarms` (AI Swarms). The proj
 
 This is the second, independent project by the author of [Sealed Ledger](https://github.com/chaoticpunk/sealed-ledger). No Sealed Ledger code, styles, or assets are reused. If Sealed Ledger is also entered in this hackathon, each README must name the other; see [SUBMISSION.md](SUBMISSION.md).
 
-Submission notes and form fields: [SUBMISSION.md](SUBMISSION.md). Judge quick start: [docs/JUDGING.md](docs/JUDGING.md). Video script: [docs/DEMO-SCRIPT.md](docs/DEMO-SCRIPT.md).
+Submission notes and form fields: [SUBMISSION.md](SUBMISSION.md). Judge quick start: [docs/JUDGING.md](docs/JUDGING.md). Video script: [docs/DEMO-SCRIPT.md](docs/DEMO-SCRIPT.md). Product brief: [docs/PRODUCT.md](docs/PRODUCT.md).
 
 [MIT](LICENSE)

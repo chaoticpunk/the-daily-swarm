@@ -40,6 +40,11 @@ export function SiteFooter() {
           <p className="news-caps text-[10px] text-ink-soft">Project</p>
           <ul className="mt-3 space-y-2 text-sm">
             <li>
+              <Link className="ink-underline" href="/about">
+                Product brief
+              </Link>
+            </li>
+            <li>
               <a className="ink-underline" href={SITE.repoUrl}>
                 Repository
               </a>
