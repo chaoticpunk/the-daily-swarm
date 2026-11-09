@@ -1,6 +1,7 @@
 # The Daily Swarm
 
 [![CI](https://github.com/chaoticpunk/the-daily-swarm/actions/workflows/ci.yml/badge.svg)](https://github.com/chaoticpunk/the-daily-swarm/actions/workflows/ci.yml)
+[![Live demo](https://img.shields.io/badge/demo-live-brightgreen)](https://the-daily-swarm.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **Live demo:** <https://the-daily-swarm.vercel.app>
