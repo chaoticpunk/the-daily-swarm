@@ -2,6 +2,8 @@
 
 The Daily Swarm · NEAR Hackathon 2026 · primary track **AI Swarms**.
 
+The product thesis, users, business model, and roadmap are at **<https://the-daily-swarm.vercel.app/about>** and in [docs/PRODUCT.md](PRODUCT.md). The current build is the auditable demo; the path to live news is Phase 2.
+
 ## 1. Fast path — no wallet (30 seconds)
 
 Open **<https://the-daily-swarm.vercel.app/sample>**.

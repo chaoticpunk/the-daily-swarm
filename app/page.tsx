@@ -292,6 +292,49 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="grid gap-8 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
+        <div className="lg:col-span-4">
+          <p className="news-caps text-[10px] text-accent-deep">The product</p>
+          <h3 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
+            An auditable newsroom, not a content farm.
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+            The current build is the prototype: a full agent pipeline with a hard
+            fact-check gate and a public ledger. The path to live news is a
+            source-pack builder, a human review console, and shareable editions.
+          </p>
+          <Link
+            href="/about"
+            className="news-caps mt-5 inline-flex items-center gap-2 border border-ink px-4 py-2.5 text-[10px] transition-colors hover:border-accent hover:text-accent-deep"
+          >
+            Read the product brief <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-3 lg:col-span-8">
+          {[
+            {
+              title: "Readers",
+              body: "A daily edition where every claim maps to a source and every flag stays visible.",
+            },
+            {
+              title: "Protocols",
+              body: "Commissioned coverage with a public record of what was pitched, checked, and paid.",
+            },
+            {
+              title: "Builders",
+              body: "An open reference implementation of an agent economy with deterministic settlement.",
+            },
+          ].map((item) => (
+            <div key={item.title} className="border-t-2 border-ink pt-4">
+              <h4 className="text-sm font-bold">{item.title}</h4>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                {item.body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mb-8 border-y-2 border-ink bg-gold/25 px-5 py-8 text-center sm:px-8">
         <p className="news-caps text-[10px] text-accent-deep">The next edition</p>
         <p className="font-headline mx-auto mt-3 max-w-3xl text-2xl leading-snug font-bold sm:text-3xl">
