@@ -3,6 +3,8 @@
 [![CI](https://github.com/chaoticpunk/the-daily-swarm/actions/workflows/ci.yml/badge.svg)](https://github.com/chaoticpunk/the-daily-swarm/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+**Live demo:** <https://the-daily-swarm.vercel.app>
+
 An autonomous newsroom with a public ledger.
 
 Three desks pitch stories. An editor commissions two. A standards desk checks every claim. Readers unlock the edition with 1 testnet NEAR, and the revenue split settles on NEAR.
@@ -13,7 +15,9 @@ The desks are autonomous software agents. The edition is the output; the settlem
 
 ## Status
 
-The newsroom, live LLM editions, NEAR testnet reader-payment verification, and the payout ledger have been exercised end-to-end. The app supports both NEAR Wallet Selector payments and manual transaction verification. Public deployment and a full MyNearWallet signing run are still outstanding.
+The app is deployed at <https://the-daily-swarm.vercel.app>. The public instance runs real live editions against the LLM.
+
+The public instance does not hold the treasury signing key, so its payout step records a local ledger instead of signing transfers. The full on-chain payout path — reader payment plus all four transfers — was exercised with real testnet transactions on a local instance; see [Testnet transactions](#testnet-transactions).
 
 ## Screenshots
 
@@ -171,13 +175,16 @@ A live reader payment and the resulting split, verifiable on the NEAR testnet ex
 
 ## Deployment
 
-Vercel works because each agent stage is a short request. Set the LLM and NEAR variables in the host; do not put them in `NEXT_PUBLIC_*`. Keep each route under 60 seconds.
+The production build runs on Vercel at <https://the-daily-swarm.vercel.app>. Vercel works because each agent stage is a short request. Set the LLM and NEAR variables in the host; do not put them in `NEXT_PUBLIC_*`. Keep each route under 60 seconds.
+
+The public instance intentionally has no `NEAR_TREASURY_PRIVATE_KEY`. Reader payments are still verified against the testnet RPC; payouts are written to the local ledger and labeled `LOCAL · NOT ON-CHAIN`. To sign real payouts from a deployment, add the treasury key as a server-side secret — only for a funded testnet-only account, and only with auth or rate limiting in front, because the payout route is public.
 
 ## Limitations
 
 - Editions and ledger rows are stored in the browser that produced them. A shared `/edition/[id]` link does not carry the edition to another browser.
 - There is no database, user account system, or rate limiting. This is a public demo; cap or rotate the LLM key before operating it at scale.
 - A reader payment is not bound to a per-edition memo or unique address. Settlement is re-verified server-side, and a process-memory replay guard prevents duplicate payouts within one server process. That guard does not survive a serverless cold start.
+- The public deployment runs payouts in local-ledger mode because it has no treasury signing key. The on-chain split was verified with real testnet transfers on a local instance; see [Testnet transactions](#testnet-transactions).
 - The reader can verify a transfer manually if the wallet flow is unavailable. The full MyNearWallet signing path is the one UI path not yet exercised end-to-end.
 - Testnet only. No mainnet, real money, or custom token.
 

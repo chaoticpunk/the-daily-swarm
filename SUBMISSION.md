@@ -5,9 +5,11 @@ NEAR Hackathon 2026 · track **swarms** · team size **1** (update if different)
 ## Links
 
 - Repository: <https://github.com/chaoticpunk/the-daily-swarm>
-- Live demo: **TODO after deployment**
+- Live demo: <https://the-daily-swarm.vercel.app>
 - Demo post (X thread): **TODO — the human author must post it**
 - Video: **TODO — attach to the first tweet**
+
+The live demo produces real editions. It verifies reader payments on NEAR testnet, but it does not hold the treasury signing key, so its payout rows are `LOCAL · NOT ON-CHAIN`. The real on-chain split is documented in the README with testnet explorer links.
 
 Do not fill the submission form’s `website` field; the hackathon API rejects a non-empty website.
 
@@ -26,7 +28,7 @@ A newsroom where the desks, editor and fact-checker are autonomous software agen
 
 Built The Daily Swarm for NEAR HACKATHON. One click produces an edition; the reader receipt and payout ledger are public. No fabricated results.
 
-[LIVE DEMO LINK]
+https://the-daily-swarm.vercel.app
 
 [VIDEO]
 
@@ -53,9 +55,9 @@ What should the swarm investigate first?
 
 ## Submission checklist
 
-- [ ] Repository is public
-- [ ] CI is green
-- [ ] Live demo is reachable
+- [x] Repository is public
+- [x] CI is green
+- [x] Live demo is reachable
 - [ ] Demo video recorded
 - [ ] X thread posted by the human author; first tweet contains the video
 - [ ] `demoUrl` is the first tweet
