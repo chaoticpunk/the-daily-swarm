@@ -14,8 +14,8 @@ const LINKS = [
 
 function NavLinksView({ pathname }: { pathname: string | null }) {
   return (
-    <nav aria-label="Primary" className="scroll-x border-t border-rule">
-      <ul className="flex min-w-max items-stretch justify-center gap-1 py-1 sm:gap-2">
+    <nav aria-label="Primary" className="border-t border-rule">
+      <ul className="flex flex-wrap items-stretch justify-center gap-1 py-1 sm:gap-2">
         {LINKS.map((link) => {
           const active =
             pathname !== null &&
@@ -28,7 +28,7 @@ function NavLinksView({ pathname }: { pathname: string | null }) {
                 href={link.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "news-caps inline-flex items-center gap-2 px-3 py-2 transition-colors sm:px-5",
+                  "news-caps inline-flex min-h-[44px] items-center gap-2 px-3 py-2 transition-colors sm:px-5",
                   active
                     ? "text-ink underline decoration-accent decoration-[3px] underline-offset-[7px]"
                     : "text-ink-soft hover:text-accent-deep",

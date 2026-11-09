@@ -11,6 +11,7 @@ import { WireFeed } from "@/components/newsroom/WireFeed";
 import { EDITOR_BUDGET, READER_PRICE_NEAR, REVENUE_SHARES } from "@/lib/config";
 import { sourcePack } from "@/lib/content/pack";
 import { useNewsroomStore } from "@/lib/store/newsroom";
+import { BEAT_STYLE, BEATS } from "@/lib/ui/beat-style";
 import {
   cn,
   formatNear,
@@ -64,7 +65,7 @@ export function NewsroomApp() {
     <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
       <section className="grid gap-6 border-b border-rule py-8 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-8">
-          <p className="news-caps text-[10px] text-accent-deep">
+          <p className="news-caps text-[11px] text-accent-deep">
             The desk · edition workflow
           </p>
           <h2 className="font-headline mt-2 text-4xl leading-none font-bold tracking-tight sm:text-5xl">
@@ -82,14 +83,14 @@ export function NewsroomApp() {
             <>
               <Link
                 href={`/edition/${edition.id}`}
-                className="news-caps bg-ink px-5 py-3 text-[10px] text-newsprint transition-colors hover:bg-accent-deep"
+                className="news-caps bg-ink px-5 py-3 text-[11px] text-newsprint transition-colors hover:bg-accent-deep"
               >
                 Open the edition <span aria-hidden="true">→</span>
               </Link>
               <button
                 type="button"
                 onClick={reset}
-                className="news-caps border border-ink px-4 py-3 text-[10px] hover:border-accent hover:text-accent-deep"
+                className="news-caps border border-ink px-4 py-3 text-[11px] hover:border-accent hover:text-accent-deep"
               >
                 Start another
               </button>
@@ -99,14 +100,14 @@ export function NewsroomApp() {
               <button
                 type="button"
                 onClick={() => void retry()}
-                className="news-caps bg-ink px-5 py-3 text-[10px] text-newsprint transition-colors hover:bg-accent-deep"
+                className="news-caps bg-ink px-5 py-3 text-[11px] text-newsprint transition-colors hover:bg-accent-deep"
               >
                 Retry this stage
               </button>
               <button
                 type="button"
                 onClick={reset}
-                className="news-caps border border-ink px-4 py-3 text-[10px] hover:border-accent hover:text-accent-deep"
+                className="news-caps border border-ink px-4 py-3 text-[11px] hover:border-accent hover:text-accent-deep"
               >
                 Start over
               </button>
@@ -150,13 +151,13 @@ export function NewsroomApp() {
           className="mt-4 flex flex-wrap items-center justify-between gap-3 border-l-4 border-gold bg-gold/15 px-4 py-3"
         >
           <div>
-            <p className="news-caps text-[9px] text-ink">Balances unavailable</p>
+            <p className="news-caps text-[10px] text-ink">Balances unavailable</p>
             <p className="mt-1 text-xs text-ink-soft">{balancesError}</p>
           </div>
           <button
             type="button"
             onClick={() => void loadBalances()}
-            className="news-caps border border-ink px-3 py-2 text-[9px] hover:border-accent hover:text-accent-deep"
+            className="news-caps border border-ink px-3 py-2 text-[10px] hover:border-accent hover:text-accent-deep"
           >
             Refresh balances
           </button>
@@ -165,7 +166,7 @@ export function NewsroomApp() {
 
       {nearConfig && !nearConfig.treasuryConfigured ? (
         <details className="group mt-4 border-l-4 border-gold bg-gold/15 px-4 py-2">
-          <summary className="news-caps cursor-pointer list-none text-[9px] text-ink">
+          <summary className="news-caps cursor-pointer list-none text-[10px] text-ink">
             Settlement signer not configured · local accounting only{" "}
             <span aria-hidden="true" className="group-open:hidden">
               +
@@ -194,7 +195,7 @@ export function NewsroomApp() {
           />
 
           <section className="mt-6 border-y border-rule py-5">
-            <p className="news-caps text-[10px] text-accent-deep">Reader revenue</p>
+            <p className="news-caps text-[11px] text-accent-deep">Reader revenue</p>
             <div className="mt-2 flex flex-wrap items-baseline gap-x-6 gap-y-3">
               <p className="font-headline flex items-baseline gap-2 text-5xl font-bold leading-none">
                 {READER_PRICE_NEAR}
@@ -219,10 +220,10 @@ export function NewsroomApp() {
 
           <section className="mt-6 border-b border-rule pb-5">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="news-caps text-[10px] text-accent-deep">
+              <p className="news-caps text-[11px] text-accent-deep">
                 Curated source pack
               </p>
-              <p className="ledger-num text-[10px] text-ink-soft">
+              <p className="ledger-num text-[11px] text-ink-soft">
                 {sourcePack.topics.length} topics ·{" "}
                 {sourcePack.topics.reduce(
                   (total, topic) => total + topic.facts.length,
@@ -242,13 +243,20 @@ export function NewsroomApp() {
                 ).size;
                 return (
                   <li key={topic.id} className="border-t border-rule-soft pt-2">
-                    <p className="news-caps text-[8px] text-accent-deep">
+                    <p className="news-caps flex flex-wrap items-center gap-1.5 text-[10px] text-accent-deep">
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "inline-block h-2 w-2 rounded-full",
+                          BEAT_STYLE[topic.beat].dot,
+                        )}
+                      />
                       {topic.beat} desk
                     </p>
                     <p className="font-headline mt-1 text-base leading-snug font-bold">
                       {topic.title}
                     </p>
-                    <p className="mt-1 text-[10px] text-ink-soft">
+                    <p className="mt-1 text-[11px] text-ink-soft">
                       {topic.facts.length} facts · {sourceCount} source
                       {sourceCount === 1 ? "" : "s"}
                     </p>
@@ -262,7 +270,7 @@ export function NewsroomApp() {
         <aside className="lg:col-span-6 xl:col-span-5" aria-label="The desk">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h3 className="font-headline text-2xl font-bold">The desk</h3>
-            <p className="ledger-num text-[10px] text-ink-soft">
+            <p className="ledger-num text-[11px] text-ink-soft">
               Budget {formatNear(EDITOR_BUDGET, 2)} NEAR · commissioned{" "}
               {formatNear(totalCost, 4)}
             </p>
@@ -270,8 +278,23 @@ export function NewsroomApp() {
           <p className="mt-1 text-[11px] text-ink-soft">
             NEAR testnet · balances read from chain
           </p>
+          <div className="mt-2 flex flex-wrap items-center gap-3 text-[11px] text-ink-soft">
+            <span className="news-caps text-[11px]">Desks</span>
+            {BEATS.map((beat) => (
+              <span key={beat} className="inline-flex items-center gap-1.5">
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "inline-block h-2 w-2 rounded-full",
+                    BEAT_STYLE[beat].dot,
+                  )}
+                />
+                {BEAT_STYLE[beat].shortLabel}
+              </span>
+            ))}
+          </div>
           {balancesState === "ready" && agents.every((agent) => agent.balance === null) ? (
-            <p className="mt-2 border-l-2 border-gold pl-2 text-[10px] leading-relaxed text-ink-soft">
+            <p className="mt-2 border-l-2 border-gold pl-2 text-[11px] leading-relaxed text-ink-soft">
               No configured testnet accounts were found. Create and fund them before a
               real reader payment; see the testnet setup in the README.
             </p>
@@ -287,9 +310,9 @@ export function NewsroomApp() {
             ))}
             <article className="paper-panel flex flex-col justify-between p-3">
               <div>
-                <p className="news-caps text-[8px] text-ink-soft">Treasury</p>
+                <p className="news-caps text-[10px] text-ink-soft">Treasury</p>
                 <p className="font-headline mt-1 text-sm font-bold">Reader payments</p>
-                <p className="mt-1 text-[10px] leading-snug text-ink-soft">
+                <p className="mt-1 text-[11px] leading-snug text-ink-soft">
                   Receives the 1 NEAR unlock and signs the split. Server-side key
                   only.
                 </p>
@@ -321,7 +344,7 @@ export function NewsroomApp() {
             rechecks={rechecks}
           />
 
-          <p className="mt-6 border-t border-rule pt-3 text-[10px] leading-relaxed text-ink-soft">
+          <p className="mt-6 border-t border-rule pt-3 text-[11px] leading-relaxed text-ink-soft">
             The desks work only from the curated source pack; they cannot browse the
             web. Every number, date, quote, and named entity in a story must trace to
             a source id.

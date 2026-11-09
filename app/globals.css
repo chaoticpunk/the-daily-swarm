@@ -11,6 +11,12 @@
   --color-rule: #c9c2b2;
   --color-rule-soft: #ddd6c7;
   --color-success: #2f6b3f;
+  --color-beat-near: #1f6f78;
+  --color-beat-near-bright: #5ec8be;
+  --color-beat-ai: #6b4fa1;
+  --color-beat-ai-bright: #b9a0e8;
+  --color-beat-markets: #a66a1f;
+  --color-beat-markets-bright: #e0a84e;
   --font-serif: var(--font-libre-baskerville), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-ibm-plex-mono), "SFMono-Regular", Menlo, monospace;
@@ -295,15 +301,19 @@ a {
 
 .scroll-x {
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bid-card,
-  .wire-in,
-  .wire-pulse,
-  .run-progress-pulse {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

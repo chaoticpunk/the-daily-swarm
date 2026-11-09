@@ -43,7 +43,7 @@ export function PaymentReceipt({
   return (
     <aside aria-labelledby="receipt-heading" className="paper-panel border-2 border-ink">
       <div className="border-b-2 border-ink bg-success/10 px-5 py-4">
-        <p className="news-caps text-[9px] text-success">Reader receipt · verified</p>
+        <p className="news-caps text-[10px] text-success">Reader receipt · verified</p>
         <h2 id="receipt-heading" className="font-headline mt-1 text-2xl font-bold">
           Edition unlocked
         </h2>
@@ -56,12 +56,12 @@ export function PaymentReceipt({
         {payment ? (
           <div className="border-b border-rule pb-3">
             <div className="flex items-baseline justify-between gap-3">
-              <p className="news-caps text-[8px] text-ink-soft">Reader payment</p>
+              <p className="news-caps text-[10px] text-ink-soft">Reader payment</p>
               <p className="ledger-num text-lg font-medium">
                 {formatNear(payment.amount)} NEAR
               </p>
             </div>
-            <p className="ledger-num mt-1 text-[10px] text-ink-soft" title={payment.from}>
+            <p className="ledger-num mt-1 text-[11px] text-ink-soft" title={payment.from}>
               from {shortAccount(payment.from, 16, 8)}
             </p>
             {payment.txHash && payment.explorerUrl ? (
@@ -69,7 +69,7 @@ export function PaymentReceipt({
                 href={payment.explorerUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="ledger-num mt-1 inline-block text-[10px] text-accent-deep underline decoration-rule"
+                className="ledger-num mt-1 inline-block text-[11px] text-accent-deep underline decoration-rule"
                 title={payment.txHash}
               >
                 View payment tx {shortHash(payment.txHash)} ↗
@@ -85,8 +85,8 @@ export function PaymentReceipt({
 
         <div className="mt-4">
           <div className="flex items-baseline justify-between gap-2">
-            <p className="news-caps text-[8px] text-ink-soft">Settlement</p>
-            <p className="ledger-num text-[10px] text-ink-soft">
+            <p className="news-caps text-[10px] text-ink-soft">Settlement</p>
+            <p className="ledger-num text-[11px] text-ink-soft">
               {formatNear(payoutTotal)} / {formatNear(edition.totalRevenue || 1)} NEAR
             </p>
           </div>
@@ -109,12 +109,12 @@ export function PaymentReceipt({
                       <p className="ledger-num text-xs">{formatNear(entry.amount)} NEAR</p>
                     </div>
                     <div className="mt-0.5 flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-                      <p className="ledger-num text-[9px] text-ink-soft" title={entry.to}>
+                      <p className="ledger-num text-[10px] text-ink-soft" title={entry.to}>
                         → {shortAccount(entry.to, 16, 8)}
                       </p>
                       <p
                         className={cn(
-                          "news-caps text-[7px]",
+                          "news-caps text-[10px]",
                           tone === "ok" && "text-success",
                           tone === "bad" && "text-accent-deep",
                           tone === "local" && "text-ink-soft",
@@ -137,17 +137,17 @@ export function PaymentReceipt({
                         href={entry.explorerUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="ledger-num mt-0.5 inline-block text-[9px] text-accent-deep underline decoration-rule"
+                        className="ledger-num mt-0.5 inline-block text-[10px] text-accent-deep underline decoration-rule"
                         title={entry.txHash}
                       >
                         tx {shortHash(entry.txHash)} ↗
                       </a>
                     ) : entry.kind === "retained" ? (
-                      <p className="mt-0.5 text-[9px] text-ink-soft">
+                      <p className="mt-0.5 text-[10px] text-ink-soft">
                         Stays in the treasury; no self-transfer.
                       </p>
                     ) : entry.kind === "local" ? (
-                      <p className="mt-0.5 text-[9px] leading-snug text-ink-soft">
+                      <p className="mt-0.5 text-[10px] leading-snug text-ink-soft">
                         Not on-chain.
                       </p>
                     ) : null}
@@ -157,7 +157,7 @@ export function PaymentReceipt({
             </ul>
           )}
 
-          <p className="ledger-num mt-2 text-[9px] text-ink-soft">
+          <p className="ledger-num mt-2 text-[10px] text-ink-soft">
             {confirmed} confirmed · {failed} failed · {local} local
           </p>
         </div>
@@ -165,7 +165,7 @@ export function PaymentReceipt({
         {payoutNotice ? (
           <p
             role="note"
-            className="mt-3 border-l-2 border-gold bg-gold/10 px-3 py-2 text-[10px] leading-relaxed text-ink"
+            className="mt-3 border-l-2 border-gold bg-gold/10 px-3 py-2 text-[11px] leading-relaxed text-ink"
           >
             {payoutNotice}
           </p>
@@ -173,11 +173,11 @@ export function PaymentReceipt({
 
         {settlementError ? (
           <div className="mt-3 border-l-2 border-accent bg-accent/5 px-3 py-2">
-            <p className="news-caps text-[9px] text-accent-deep">
+            <p className="news-caps text-[10px] text-accent-deep">
               {canRetry ? "Settlement failed" : "Partial settlement"}
             </p>
-            <p className="mt-1 text-[10px] leading-relaxed">{settlementError}</p>
-            <p className="mt-1 text-[9px] leading-relaxed text-ink-soft">
+            <p className="mt-1 text-[11px] leading-relaxed">{settlementError}</p>
+            <p className="mt-1 text-[10px] leading-relaxed text-ink-soft">
               The reader payment is verified and the edition is unlocked.
               {canRetry
                 ? " Settlement can be retried without paying again."
@@ -188,7 +188,7 @@ export function PaymentReceipt({
                 type="button"
                 onClick={onRetry}
                 disabled={busy}
-                className="news-caps mt-2 border border-ink px-3 py-2 text-[9px] hover:border-accent hover:text-accent-deep disabled:opacity-50"
+                className="news-caps mt-2 border border-ink px-3 py-2 text-[10px] hover:border-accent hover:text-accent-deep disabled:opacity-50"
               >
                 {busy ? "Retrying…" : "Retry settlement"}
               </button>
@@ -198,15 +198,15 @@ export function PaymentReceipt({
 
         {incomplete && !settlementError ? (
           <div className="mt-3 border-l-2 border-gold bg-gold/10 px-3 py-2">
-            <p className="news-caps text-[9px]">Settlement incomplete</p>
-            <p className="mt-1 text-[10px] leading-relaxed text-ink-soft">
+            <p className="news-caps text-[10px]">Settlement incomplete</p>
+            <p className="mt-1 text-[11px] leading-relaxed text-ink-soft">
               The payment is verified, but no payout entries were recorded.
             </p>
             <button
               type="button"
               onClick={onRetry}
               disabled={busy || !canRetry}
-              className="news-caps mt-2 border border-ink px-3 py-2 text-[9px] hover:border-accent hover:text-accent-deep disabled:opacity-50"
+              className="news-caps mt-2 border border-ink px-3 py-2 text-[10px] hover:border-accent hover:text-accent-deep disabled:opacity-50"
             >
               {busy ? "Settling…" : "Settle the split"}
             </button>
@@ -215,14 +215,14 @@ export function PaymentReceipt({
 
         <a
           href="#edition-ledger"
-          className="news-caps mt-4 inline-block text-[9px] text-ink-soft underline decoration-rule hover:text-accent-deep"
+          className="news-caps mt-4 inline-block text-[10px] text-ink-soft underline decoration-rule hover:text-accent-deep"
         >
           Jump to the full ledger ↓
         </a>
       </div>
 
       <div className="border-t border-rule bg-newsprint-deep px-5 py-3">
-        <p className="news-caps text-[8px] text-ink-soft">
+        <p className="news-caps text-[10px] text-ink-soft">
           Testnet only · no real money · demo edition
         </p>
       </div>

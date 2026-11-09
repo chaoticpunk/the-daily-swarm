@@ -53,7 +53,7 @@ export default function HomePage() {
     <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
       <section className="grid gap-10 border-b-2 border-ink py-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
         <div className="lg:col-span-8">
-          <p className="news-caps text-[10px] text-accent-deep">
+          <p className="news-caps text-[11px] text-accent-deep">
             The daily edition · NEAR testnet
           </p>
           <h2 className="font-headline mt-5 max-w-4xl text-[2.5rem] leading-[1.02] font-bold tracking-[-0.025em] sm:text-5xl lg:text-[4.2rem]">
@@ -103,7 +103,7 @@ export default function HomePage() {
               [String(facts), "sourced facts"],
             ].map(([value, label]) => (
               <div key={label}>
-                <dt className="news-caps text-[9px] text-ink-soft">{label}</dt>
+                <dt className="news-caps text-[10px] text-ink-soft">{label}</dt>
                 <dd className="ledger-num mt-1 text-lg font-medium">{value}</dd>
               </div>
             ))}
@@ -113,13 +113,13 @@ export default function HomePage() {
         <aside className="lg:col-span-4">
           <div className="paper-panel p-5 sm:p-6">
             <div className="flex items-center justify-between border-b-2 border-ink pb-3">
-              <p className="news-caps text-[10px]">Today&apos;s front page</p>
-              <p className="ledger-num text-[10px] text-ink-soft">Awaiting commission</p>
+              <p className="news-caps text-[11px]">Today&apos;s front page</p>
+              <p className="ledger-num text-[11px] text-ink-soft">Awaiting commission</p>
             </div>
             <div className="mt-4 space-y-4">
               {[1, 2].map((slot) => (
                 <div key={slot} className="border-t border-rule-soft pt-3">
-                  <p className="news-caps text-[9px] text-accent-deep">
+                  <p className="news-caps text-[10px] text-accent-deep">
                     Story slot {String(slot).padStart(2, "0")}
                   </p>
                   <p className="font-headline mt-2 text-xl leading-tight text-ink/50">
@@ -134,7 +134,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="mt-5 border-t border-rule pt-3">
-              <p className="news-caps text-[9px] text-ink-soft">
+              <p className="news-caps text-[10px] text-ink-soft">
                 {sourcePack.topics.length} topics · {facts} facts · curated sources
               </p>
               <p className="mt-2 text-xs leading-relaxed text-ink-soft">
@@ -143,7 +143,7 @@ export default function HomePage() {
               </p>
             </div>
           </div>
-          <p className="news-caps mt-3 text-center text-[9px] text-ink-soft">
+          <p className="news-caps mt-3 text-center text-[10px] text-ink-soft">
             {SITE.demoLabel}
           </p>
         </aside>
@@ -152,7 +152,7 @@ export default function HomePage() {
       <section className="border-b border-rule py-10 lg:py-14">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="news-caps text-[10px] text-accent-deep">How an edition is made</p>
+            <p className="news-caps text-[11px] text-accent-deep">How an edition is made</p>
             <h3 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
               From pitch to press.
             </h3>
@@ -180,7 +180,7 @@ export default function HomePage() {
 
       <section className="grid gap-10 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
         <div className="lg:col-span-7">
-          <p className="news-caps text-[10px] text-accent-deep">The masthead</p>
+          <p className="news-caps text-[11px] text-accent-deep">The masthead</p>
           <h3 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
             Five desks. One editor.
           </h3>
@@ -221,7 +221,7 @@ export default function HomePage() {
         </div>
 
         <div className="lg:col-span-5">
-          <p className="news-caps text-[10px] text-accent-deep">The economy</p>
+          <p className="news-caps text-[11px] text-accent-deep">The economy</p>
           <h3 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
             Reader revenue, on the record.
           </h3>
@@ -253,7 +253,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="paper-inset mt-6 p-4">
-            <p className="news-caps text-[9px] text-ink-soft">The ledger rule</p>
+            <p className="news-caps text-[10px] text-ink-soft">The ledger rule</p>
             <p className="font-headline mt-2 text-lg leading-snug">
               Reader access is verified on NEAR before the edition unlocks. A payout
               is never marked settled without a transaction hash.
@@ -264,7 +264,7 @@ export default function HomePage() {
 
       <section className="grid gap-8 py-10 lg:grid-cols-12 lg:py-14">
         <div className="lg:col-span-4">
-          <p className="news-caps text-[10px] text-accent-deep">The settlement layer</p>
+          <p className="news-caps text-[11px] text-accent-deep">The settlement layer</p>
           <h3 className="font-headline mt-2 text-3xl font-bold">
             Where NEAR fits.
           </h3>
@@ -294,7 +294,7 @@ export default function HomePage() {
 
       <section className="grid gap-8 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
         <div className="lg:col-span-4">
-          <p className="news-caps text-[10px] text-accent-deep">The product</p>
+          <p className="news-caps text-[11px] text-accent-deep">The product</p>
           <h3 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
             An auditable newsroom, not a content farm.
           </h3>
@@ -305,7 +305,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/about"
-            className="news-caps mt-5 inline-flex items-center gap-2 border border-ink px-4 py-2.5 text-[10px] transition-colors hover:border-accent hover:text-accent-deep"
+            className="news-caps mt-5 inline-flex items-center gap-2 border border-ink px-4 py-2.5 text-[11px] transition-colors hover:border-accent hover:text-accent-deep"
           >
             Read the product brief <span aria-hidden="true">→</span>
           </Link>
@@ -336,7 +336,7 @@ export default function HomePage() {
       </section>
 
       <section className="mb-8 border-y-2 border-ink bg-gold/25 px-5 py-8 text-center sm:px-8">
-        <p className="news-caps text-[10px] text-accent-deep">The next edition</p>
+        <p className="news-caps text-[11px] text-accent-deep">The next edition</p>
         <p className="font-headline mx-auto mt-3 max-w-3xl text-2xl leading-snug font-bold sm:text-3xl">
           Three pitches in. One edition out. A public ledger at the end.
         </p>

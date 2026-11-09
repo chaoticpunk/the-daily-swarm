@@ -69,7 +69,7 @@ export function LedgerPageClient() {
       <header className="border-b-2 border-ink py-8">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <p className="news-caps text-[10px] text-accent-deep">
+            <p className="news-caps text-[11px] text-accent-deep">
               Reader payments · contributor payouts
             </p>
             <h1 className="font-headline mt-2 text-4xl leading-none font-bold tracking-tight sm:text-6xl">
@@ -83,13 +83,13 @@ export function LedgerPageClient() {
             </p>
           </div>
           <div className="lg:col-span-4 lg:border-l lg:border-rule lg:pl-5">
-            <p className="news-caps text-[9px] text-ink-soft">Settlement network</p>
+            <p className="news-caps text-[10px] text-ink-soft">Settlement network</p>
             <p className="ledger-num mt-2 text-[11px]">
               {health
                 ? `${health.near.network} · ${health.near.rpcHost}`
                 : "—"}
             </p>
-            <p className="mt-1 text-[10px] text-ink-soft">
+            <p className="mt-1 text-[11px] text-ink-soft">
               Treasury:{" "}
               <span className="ledger-num">
                 {shortAccount(
@@ -98,7 +98,7 @@ export function LedgerPageClient() {
                 )}
               </span>
             </p>
-            <p className="mt-1 text-[10px] text-ink-soft">
+            <p className="mt-1 text-[11px] text-ink-soft">
               Settlement:{" "}
               {health
                 ? health.near.payoutsReady
@@ -124,7 +124,7 @@ export function LedgerPageClient() {
           ],
         ].map(([label, value]) => (
           <div key={label} className="bg-newsprint px-4 py-4">
-            <p className="news-caps text-[8px] text-ink-soft">{label}</p>
+            <p className="news-caps text-[10px] text-ink-soft">{label}</p>
             <p className="ledger-num mt-1 text-lg">{value}</p>
           </div>
         ))}
@@ -136,7 +136,7 @@ export function LedgerPageClient() {
         </p>
       ) : editions.length === 0 ? (
         <div className="paper-panel my-8 p-6 sm:p-10">
-          <p className="news-caps text-[10px] text-accent-deep">Nothing settled yet</p>
+          <p className="news-caps text-[11px] text-accent-deep">Nothing settled yet</p>
           <h2 className="font-headline mt-2 text-3xl font-bold">
             No editions in this browser.
           </h2>
@@ -148,13 +148,13 @@ export function LedgerPageClient() {
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/newsroom"
-              className="news-caps bg-ink px-5 py-3 text-[10px] text-newsprint hover:bg-accent-deep"
+              className="news-caps bg-ink px-5 py-3 text-[11px] text-newsprint hover:bg-accent-deep"
             >
               Produce today&apos;s edition
             </Link>
             <Link
               href="/"
-              className="news-caps border border-ink px-5 py-3 text-[10px] hover:border-accent hover:text-accent-deep"
+              className="news-caps border border-ink px-5 py-3 text-[11px] hover:border-accent hover:text-accent-deep"
             >
               Back to the front page
             </Link>
@@ -172,7 +172,7 @@ export function LedgerPageClient() {
             <button
               type="button"
               onClick={() => setRefreshKey((value) => value + 1)}
-              className="news-caps border border-ink px-3 py-2 text-[9px] hover:border-accent hover:text-accent-deep"
+              className="news-caps border border-ink px-3 py-2 text-[10px] hover:border-accent hover:text-accent-deep"
             >
               Refresh
             </button>
@@ -191,7 +191,7 @@ export function LedgerPageClient() {
               >
                 <div className="flex flex-wrap items-end justify-between gap-3">
                   <div>
-                    <p className="news-caps text-[9px] text-accent-deep">
+                    <p className="news-caps text-[10px] text-accent-deep">
                       {shortDateLabel(edition.date)} · {edition.stories.length} stories
                     </p>
                     <h2
@@ -205,15 +205,15 @@ export function LedgerPageClient() {
                     <span
                       className={
                         edition.status === "paid"
-                          ? "news-caps bg-success/10 px-2 py-1 text-[8px] text-success"
-                          : "news-caps bg-gold/30 px-2 py-1 text-[8px] text-ink"
+                          ? "news-caps bg-success/10 px-2 py-1 text-[10px] text-success"
+                          : "news-caps bg-gold/30 px-2 py-1 text-[10px] text-ink"
                       }
                     >
                       {edition.status === "paid" ? "Paid" : "Awaiting payment"}
                     </span>
                     <Link
                       href={`/edition/${edition.id}`}
-                      className="news-caps border border-ink px-3 py-2 text-[9px] hover:border-accent hover:text-accent-deep"
+                      className="news-caps border border-ink px-3 py-2 text-[10px] hover:border-accent hover:text-accent-deep"
                     >
                       Open edition
                     </Link>
@@ -235,7 +235,7 @@ export function LedgerPageClient() {
           })}
 
           <div className="border-t border-rule pt-4">
-            <p className="text-[10px] leading-relaxed text-ink-soft">
+            <p className="text-[11px] leading-relaxed text-ink-soft">
               Editions and settlements are kept in this browser&apos;s local storage.
               On-chain entries remain verifiable on the NEAR testnet explorer; local
               rows are explicitly marked.

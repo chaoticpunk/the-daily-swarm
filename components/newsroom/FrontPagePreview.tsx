@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getAgentConfig } from "@/lib/config";
 import type { Edition, Story } from "@/lib/types";
+import { BEAT_STYLE } from "@/lib/ui/beat-style";
 import { cn } from "@/lib/utils";
 
 function storyFactStatus(story: Story): "passed" | "revised" | "unresolved" | "unchecked" {
@@ -38,7 +39,7 @@ export function FrontPagePreview({
           <h2 id="front-page-heading" className="font-headline text-2xl font-bold">
             Today&apos;s front page
           </h2>
-          <p className="news-caps text-[9px] text-ink-soft">
+          <p className="news-caps text-[10px] text-ink-soft">
             {phase === "running" ? "In production" : "Awaiting commission"}
           </p>
         </div>
@@ -52,7 +53,7 @@ export function FrontPagePreview({
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {[1, 2].map((slot) => (
             <div key={slot} className="border-t-2 border-rule pt-3">
-              <p className="news-caps text-[9px] text-accent-deep">
+              <p className="news-caps text-[10px] text-accent-deep">
                 Story slot {String(slot).padStart(2, "0")}
               </p>
               <p className="font-headline mt-2 text-2xl leading-tight text-ink/35">
@@ -85,7 +86,7 @@ export function FrontPagePreview({
         <h2 id="front-page-heading" className="font-headline text-2xl font-bold">
           Today&apos;s front page
         </h2>
-        <p className="news-caps text-[9px] text-success">Edition published</p>
+        <p className="news-caps text-[10px] text-success">Edition published</p>
       </div>
 
       <div className="mt-5 space-y-7">
@@ -95,7 +96,14 @@ export function FrontPagePreview({
           const finalDraft = story.revisedDraft ?? story.draft;
           return (
             <article key={story.id} className={cn(index > 0 && "border-t border-rule pt-6")}>
-              <p className="news-caps text-[9px] text-accent-deep">
+              <p className="news-caps flex flex-wrap items-center gap-1.5 text-[10px] text-accent-deep">
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "inline-block h-2 w-2 rounded-full",
+                    BEAT_STYLE[story.assignment.beat].dot,
+                  )}
+                />
                 {agent?.desk ?? "Desk"} · {story.assignment.wordCount} words ·{" "}
                 {story.assignment.fee.toFixed(2)} NEAR
               </p>
@@ -111,7 +119,7 @@ export function FrontPagePreview({
               </p>
               <p
                 className={cn(
-                  "news-caps mt-2 inline-block px-2 py-1 text-[8px]",
+                  "news-caps mt-2 inline-block px-2 py-1 text-[10px]",
                   status === "unresolved"
                     ? "bg-accent/10 text-accent-deep"
                     : "bg-success/10 text-success",
@@ -125,7 +133,7 @@ export function FrontPagePreview({
       </div>
 
       <div className="mt-6 border-t-2 border-ink pt-4">
-        <p className="news-caps text-[9px] text-ink-soft">Editor&apos;s note</p>
+        <p className="news-caps text-[10px] text-ink-soft">Editor&apos;s note</p>
         <p className="font-headline mt-2 text-lg leading-snug">{editorNote}</p>
         {pullQuote ? (
           <blockquote className="mt-4 border-l-2 border-accent pl-3">
@@ -144,7 +152,7 @@ export function FrontPagePreview({
 
       <Link
         href={`/edition/${edition.id}`}
-        className="news-caps mt-5 inline-flex items-center gap-3 bg-ink px-5 py-3 text-[10px] text-newsprint transition-colors hover:bg-accent-deep"
+        className="news-caps mt-5 inline-flex items-center gap-3 bg-ink px-5 py-3 text-[11px] text-newsprint transition-colors hover:bg-accent-deep"
       >
         Open the edition · reader access 1 NEAR{" "}
         <span aria-hidden="true">→</span>

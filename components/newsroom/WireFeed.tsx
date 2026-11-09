@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { getAgentConfig } from "@/lib/config";
 import type { WireEvent, WireEventKind } from "@/lib/types";
+import { BEAT_STYLE } from "@/lib/ui/beat-style";
 import { cn } from "@/lib/utils";
 
 const DOT: Record<WireEventKind, string> = {
@@ -68,14 +69,14 @@ export function WireFeed({
                   : "bg-newsprint/30",
             )}
           />
-          <h3 id="wire-heading" className="news-caps text-[10px]">
+          <h3 id="wire-heading" className="news-caps text-[11px]">
             The wire
           </h3>
-          <span className="news-caps text-[8px] text-newsprint/40">
+          <span className="news-caps text-[10px] text-newsprint/40">
             Live from the desk
           </span>
         </div>
-        <p className="ledger-num text-[9px] text-newsprint/45">
+        <p className="ledger-num text-[10px] text-newsprint/45">
           {events.length} {events.length === 1 ? "dispatch" : "dispatches"}
         </p>
       </div>
@@ -93,7 +94,7 @@ export function WireFeed({
               The wire is quiet. Produce an edition and each dispatch prints here
               as the desks file it.
             </p>
-            <p className="ledger-num mt-2 text-[9px] leading-relaxed text-newsprint/40">
+            <p className="ledger-num mt-2 text-[10px] leading-relaxed text-newsprint/40">
               No generated copy is pre-filled. Every line comes from an actual
               agent response.
             </p>
@@ -124,23 +125,32 @@ export function WireFeed({
                   </div>
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-baseline gap-x-2">
-                      <span className="ledger-num text-[8px] text-newsprint/40">
+                      <span className="ledger-num text-[10px] text-newsprint/40">
                         {wireTime(event.at)}
                       </span>
-                      <span className="news-caps text-[8px] text-[#e4d9bf]">
+                      {agent?.beat ? (
+                        <span
+                          aria-hidden="true"
+                          className={cn(
+                            "inline-block h-1.5 w-1.5 rounded-full",
+                            BEAT_STYLE[agent.beat].wireDot,
+                          )}
+                        />
+                      ) : null}
+                      <span className="news-caps text-[10px] text-[#e4d9bf]">
                         {agent?.name ?? "The newsroom"}
                       </span>
                       {agent ? (
-                        <span className="news-caps text-[8px] text-newsprint/30">
+                        <span className="news-caps text-[10px] text-newsprint/30">
                           {agent.desk}
                         </span>
                       ) : null}
                     </div>
-                    <p className="mt-0.5 text-[12.5px] leading-snug text-newsprint">
+                    <p className="mt-0.5 text-sm leading-snug text-newsprint">
                       {event.message}
                     </p>
                     {event.detail ? (
-                      <p className="ledger-num mt-0.5 text-[9.5px] leading-relaxed text-newsprint/45">
+                      <p className="ledger-num mt-0.5 text-[11px] leading-relaxed text-newsprint/45">
                         {event.detail}
                       </p>
                     ) : null}

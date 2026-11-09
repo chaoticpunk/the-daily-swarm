@@ -41,6 +41,8 @@ A read-only [sample edition](https://the-daily-swarm.vercel.app/sample) is avail
 
 ![The standards desk annotates every claim after unlock](docs/screenshots/standards.png)
 
+![The product brief, with the four-move pipeline and beat colors](docs/screenshots/product.png)
+
 ## How an edition is made
 
 1. **Pitch.** The NEAR, AI, and markets desks read a curated source pack and file one pitch each: headline, angle, sourced claims, fee, and word count.

@@ -6,6 +6,7 @@ import type {
   FactCheckVerdict,
   Pitch,
 } from "@/lib/types";
+import { beatStyle } from "@/lib/ui/beat-style";
 import { cn } from "@/lib/utils";
 
 const VERDICT_LABEL: Record<FactCheckVerdict, string> = {
@@ -46,10 +47,10 @@ export function FactCheckPanel({
   return (
     <section aria-labelledby="standards-heading" className="mt-6">
       <div className="flex items-baseline justify-between gap-2">
-        <h3 id="standards-heading" className="news-caps text-[10px] text-accent-deep">
+        <h3 id="standards-heading" className="news-caps text-[11px] text-accent-deep">
           Standards desk
         </h3>
-        <p className="text-[10px] text-ink-soft">Every claim mapped to a source</p>
+        <p className="text-[11px] text-ink-soft">Every claim mapped to a source</p>
       </div>
 
       {assignments.length === 0 ? (
@@ -67,15 +68,27 @@ export function FactCheckPanel({
             const check = factChecks[assignment.pitchId];
             const recheck = rechecks[assignment.pitchId];
             const agent = getAgentConfig(assignment.agentId);
+            const beat = beatStyle(assignment.beat);
             const finalDraft = revised ?? draft;
             const finalCheck = recheck ?? check;
             const counts = finalCheck ? verdictCounts(finalCheck) : null;
 
             return (
               <article key={assignment.pitchId} className="paper-panel p-4">
+                <div
+                  className={cn("-mx-4 -mt-4 mb-3 h-1", beat?.bar ?? "bg-ink")}
+                  aria-hidden="true"
+                />
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <p className="news-caps text-[8px] text-ink-soft">
+                    <p className="news-caps flex flex-wrap items-center gap-1.5 text-[10px] text-ink-soft">
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "inline-block h-2 w-2 rounded-full",
+                          beat?.dot ?? "bg-ink",
+                        )}
+                      />
                       {agent?.name ?? assignment.agentId} · {assignment.beat} desk
                     </p>
                     <h4 className="font-headline mt-1 text-base leading-tight font-bold">
@@ -84,7 +97,7 @@ export function FactCheckPanel({
                   </div>
                   <span
                     className={cn(
-                      "news-caps shrink-0 px-2 py-1 text-[8px]",
+                      "news-caps shrink-0 px-2 py-1 text-[10px]",
                       !finalCheck
                         ? "bg-newsprint-deep text-ink-soft"
                         : finalCheck.overall === "pass"
@@ -106,7 +119,7 @@ export function FactCheckPanel({
                   </span>
                 </div>
 
-                <p className="ledger-num mt-2 text-[10px] text-ink-soft">
+                <p className="ledger-num mt-2 text-[11px] text-ink-soft">
                   Fee {assignment.fee.toFixed(4)} NEAR · {assignment.wordCount} assigned
                   {finalDraft ? ` · ${finalDraft.wordCount} filed` : ""}
                 </p>
@@ -125,7 +138,7 @@ export function FactCheckPanel({
 
                 {finalCheck ? (
                   <details className="group mt-2 border-t border-rule-soft pt-2">
-                    <summary className="news-caps cursor-pointer list-none text-[8px] text-ink-soft hover:text-accent-deep">
+                    <summary className="news-caps cursor-pointer list-none text-[10px] text-ink-soft hover:text-accent-deep">
                       {finalCheck.checks.length} checks{" "}
                       <span aria-hidden="true" className="group-open:hidden">
                         +
@@ -137,7 +150,7 @@ export function FactCheckPanel({
                           <div className="flex items-start gap-2">
                             <span
                               className={cn(
-                                "news-caps mt-0.5 shrink-0 px-1.5 py-0.5 text-[7px]",
+                                "news-caps mt-0.5 shrink-0 px-1.5 py-0.5 text-[10px]",
                                 VERDICT_STYLE[item.verdict],
                               )}
                             >
@@ -145,7 +158,7 @@ export function FactCheckPanel({
                             </span>
                             <p className="leading-snug">{item.claim}</p>
                           </div>
-                          <p className="mt-0.5 pl-1 text-[10px] text-ink-soft">
+                          <p className="mt-0.5 pl-1 text-[11px] text-ink-soft">
                             {item.note}{" "}
                             <span className="ledger-num text-accent-deep">
                               [{item.sourceId}]
@@ -158,7 +171,7 @@ export function FactCheckPanel({
                 ) : null}
 
                 {revised ? (
-                  <p className="mt-2 border-l-2 border-gold pl-2 text-[10px] text-ink-soft">
+                  <p className="mt-2 border-l-2 border-gold pl-2 text-[11px] text-ink-soft">
                     Revised once after the fact-check
                     {recheck
                       ? recheck.overall === "pass"
@@ -167,7 +180,7 @@ export function FactCheckPanel({
                       : "."}
                   </p>
                 ) : check?.overall === "revise" ? (
-                  <p className="mt-2 border-l-2 border-accent pl-2 text-[10px] text-accent-deep">
+                  <p className="mt-2 border-l-2 border-accent pl-2 text-[11px] text-accent-deep">
                     Reporter revision requested.
                   </p>
                 ) : null}
