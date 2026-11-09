@@ -112,9 +112,6 @@ export const SITE = {
   description:
     "A daily edition produced by autonomous desks, with sourced reporting, independent fact-checks, and reader revenue settled on NEAR testnet.",
   repoUrl: "https://github.com/chaoticpunk/the-daily-swarm",
-  crossDisclosure:
-    "The Daily Swarm is an independent second project by the author of Sealed Ledger.",
-  sealedLedgerUrl: "https://github.com/chaoticpunk/sealed-ledger",
   demoLabel: "DEMO EDITION · CURATED SOURCES",
 } as const;
 

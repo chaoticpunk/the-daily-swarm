@@ -1,32 +1,37 @@
 # Submission notes
 
-NEAR Hackathon 2026 · primary track **AI Swarms** (`swarms`) · team size **1 — Solo builder**.
+NEAR Hackathon 2026 · tracks **AI Swarms** (`swarms`) + **Autonomous Business** (`business`) · team size **1** (API) / `1 — Solo builder` (form).
 
-The form allows selecting multiple tracks. The official FAQ says: “Select every track your project fits.” Keep AI Swarms as the primary narrative. **Autonomous Business** (`business`) is a legitimate second track — the newsroom runs a treasury, sells reader access, commissions its own desks, and splits revenue — but add it only if the “What did you build?” text supports both stories.
+Official rules to keep in view:
 
-## Final links
+- Deadline: **2026-11-14T23:59:00Z**. Judging starts **2026-11-16T00:00:00Z**; results by **2026-11-18T23:59:00Z**.
+- One submission per project. Each repository can be submitted only once.
+- The repository must be public by the deadline and stay public through judging.
+- The demo post is a public X post by the human, with the video or screenshots attached. The agent must not post it.
+- The agent must not send the submission until the human has seen the full JSON payload and said yes.
+
+## Final fields
 
 | Form field | Value |
 | --- | --- |
+| Project name | `The Daily Swarm` |
+| Team lead | **human fills in** (2–80 chars) |
+| Email address | **human fills in** (max 160 chars) |
+| Team size | Form: `1 — Solo builder` · API: `"1"` |
+| Tracks | Recommended: `["swarms", "business"]`. Focused alternative: `["swarms"]`. |
+| NEAR wallet address | **human fills in**: a **mainnet** named account (e.g. `team.near`) or 64-character implicit account. Not testnet. Never a private key. |
 | Repository link | <https://github.com/chaoticpunk/the-daily-swarm> |
-| Demo post link | **TODO — the public X thread; the first tweet contains the video** |
-| Website | **Leave empty.** The live URL goes in the demo post and the project description. |
-| Tracks | **AI Swarms** (primary); optionally **Autonomous Business** |
-| Team size | **1 — Solo builder** |
-| Project name | The Daily Swarm |
-| Team lead / email | Fill in |
-| NEAR wallet address | Your wallet; this is where a prize would be sent |
+| Demo post link | **TODO**: public X post after the human records and posts the video |
+| Website | **Leave empty.** The form/API treats a non-empty website as a spam trap. |
 
-The live demo is not a separate form field: <https://the-daily-swarm.vercel.app>
+The live demo is not a form field: <https://the-daily-swarm.vercel.app>
 The no-wallet sample edition: <https://the-daily-swarm.vercel.app/sample>
 The product brief: <https://the-daily-swarm.vercel.app/about>
-
-Demo post requirements: public X post; say you built it at NEAR HACKATHON; tag `@NEARProtocol` and `#NEARHackathon`; attach the video or screenshots. The first tweet must contain the video and the live URL.
 
 ## What did you build? (copy-paste, 20–2,000 characters)
 
 ```text
-The Daily Swarm is an auditable AI newsroom for a niche beat. Three reporter agents pitch stories with a fee and word count; an editor commissions two under a fixed budget and records why the third was passed; a standards desk checks every claim against a source pack and forces one revision when a claim is unsupported. A live wire prints every dispatch. Readers unlock the edition with 1 testnet NEAR; a deterministic 55/20/15/10 split settles to agent sub-accounts on NEAR testnet. The prototype proves the full loop — source-grounded writing, independent checks, reader payment, and a public ledger. The repo includes a no-wallet sample edition, 48 tests, and real testnet explorer links for a reader payment and all four transfers. The product path — live primary-source ingestion, human review, shareable editions, subscriptions, and an audit API — is in docs/PRODUCT.md. The public deployment verifies payments on the testnet RPC but does not hold the treasury signing key, so its payout rows are labeled LOCAL · NOT ON-CHAIN.
+AI-generated news is opaque: readers cannot see which source supports a sentence, what was checked, or who was paid. The Daily Swarm is an auditable AI newsroom for a niche beat. Three reporter agents pitch stories with a fee and word count; an editor commissions two under a fixed budget and records why the third was passed; a standards desk checks every claim against a source pack and forces one revision when a claim is unsupported. A live wire prints every dispatch. Readers unlock the edition with 1 testnet NEAR. NEAR is the settlement and audit layer: each agent has a sub-account, the reader payment is verified on the testnet RPC, and the deterministic 55/20/15/10 split is recorded in a public ledger. The prototype proves the full loop — source-grounded writing, independent checks, reader payment, and auditable settlement. The repo includes a no-wallet sample edition, 48 tests, and real testnet explorer links for a reader payment and all four transfers. The public deployment verifies payments on testnet but does not hold the treasury signing key, so its payout rows are labeled LOCAL · NOT ON-CHAIN. The product path — live primary-source ingestion, human review, shareable editions, subscriptions, and an audit API — is in docs/PRODUCT.md.
 
 Live demo: https://the-daily-swarm.vercel.app
 Sample (no wallet): https://the-daily-swarm.vercel.app/sample
@@ -34,63 +39,99 @@ Product brief: https://the-daily-swarm.vercel.app/about
 Repo: https://github.com/chaoticpunk/the-daily-swarm
 ```
 
-## Verified state
+## Official compliance check
 
-| Check | Result |
+| Requirement | Status |
 | --- | --- |
-| `npm run typecheck` | pass |
-| `npm run lint` | pass |
-| `npm test` | 48 tests · 8 files |
-| `npm run build` | pass · 20 route entries, including `/sample` |
-| Fresh worktree, no `.env.local` | `npm ci` + `npm test` + `npm run build` pass |
-| Live routes `/`, `/about`, `/sample`, `/newsroom`, `/ledger` | HTTP 200 |
-| Live `/api/health` | `ok:true`, LLM configured, NEAR testnet, `payoutsReady:false` |
-| Live `/api/agent/pitch` | HTTP 200 · `Qwen/Qwen3.8-27B` · 7.1s |
-| Vercel Production env | `NEARAI_CLOUD_API_KEY` set; **no `NEAR_TREASURY_PRIVATE_KEY`** |
-| CI on latest `main` | success |
-| Repository visibility | public |
+| Project name 2–80 chars | ✅ `The Daily Swarm` |
+| Team lead 2–80 chars | ❌ human fills in |
+| Email max 160 chars | ❌ human fills in |
+| Team size exactly one of the allowed strings | ⚠️ form `1 — Solo builder`; API must be `"1"` |
+| Tracks: every track the project fits, using ids | ✅ recommended `["swarms", "business"]` |
+| NEAR payout account: mainnet named or 64-char implicit | ❌ human fills in; must not be testnet |
+| Repository public and uniquely submitted | ✅ public; not submitted yet — confirm before sending |
+| Demo post: public X post with video/screenshots | ❌ not posted yet |
+| Idea: 20–2,000 chars, problem + product + NEAR role | ✅ problem-led copy above |
+| Consent notice read and agreed | ❌ human must agree |
+| Website empty (spam trap) | ✅ leave empty |
+| Code written in the window | ✅ initial commit 2026-11-08, after 2026-10-19 |
+| License | ✅ MIT (`LICENSE`) |
+| Testnet-only eligible | ✅ Q-010 allows testnet-only projects in all tracks |
+| Hosted demo | ✅ live; keep it up through 2026-11-18, ideally 2026-11-25 |
+| Secrets not committed | ✅ only `.env.example` tracked |
+| No mainnet transaction or deployment | ✅ testnet only |
+| Agent did not post on X | ✅ |
+| Submission API not sent yet | ✅ waiting for human confirmation |
+| README readable by screening agents | ✅ “For judges” quick start, routes, tests, limits |
 
-The production deployment was promoted with `vercel --prod` after the merge. The live sample route returns 200, and the live pitch endpoint produced a real pitch with the production key. Vercel is not auto-deploying from GitHub, so future changes need `npx vercel --prod` or `vercel git connect`.
+## Submission API payload (do not send yet)
 
-## What is on-chain vs local
+Print the full JSON, fill the human fields, and send only after a yes:
 
-- The public deployment **verifies reader payments on-chain** against the NEAR testnet RPC.
-- It intentionally does **not** hold `NEAR_TREASURY_PRIVATE_KEY`, so its payout rows are `LOCAL · NOT ON-CHAIN`.
-- The full on-chain split — reader payment plus all four transfers — was exercised on a local instance. Explorer links are in the README’s [Testnet transactions](README.md#testnet-transactions) section.
-- Do not add the treasury key to the public deployment without auth, rate limiting, and durable replay protection. The payout route is public, reader payments are not bound to an edition, and the in-process replay guard does not survive a serverless cold start.
+```json
+{
+  "requestId": "<generate once with uuidgen | tr A-Z a-z>",
+  "projectName": "The Daily Swarm",
+  "leadName": "<human>",
+  "email": "<human>",
+  "size": "1",
+  "tracks": ["swarms", "business"],
+  "nearAddress": "<human mainnet account>",
+  "projectUrl": "https://github.com/chaoticpunk/the-daily-swarm",
+  "demoUrl": "<public X post URL>",
+  "idea": "<copy the What did you build? block>",
+  "consent": true
+}
+```
 
-## Video
+Rules:
 
-Script and shot list: [docs/DEMO-SCRIPT.md](docs/DEMO-SCRIPT.md).
+- Body ≤ 12,000 bytes. Exact fields only; do not send `website` or any extra field.
+- Generate `requestId` once. Reuse it on a retry after a network error or 503.
+- 201 = saved. 400 = fix the listed fields and resend with the same `requestId`. 403 = submissions closed or cross-site; tell the human, do not retry. 409 = repository already submitted or email limit; do not change the link or email to get around it. 413 = shorten the description. 503 = wait and retry with the same `requestId`.
+- Never submit twice. If a saved submission has a mistake, the human requests changes at <https://nearhackathon.com/request-changes>.
 
-The video must show the live URL and the on-chain evidence. Say clearly that the public instance’s payouts are local accounting; do not imply the public server signs transfers.
+## Consent notice (read verbatim)
+
+> I agree that the organizers may use these details to review our submission and contact us about this hackathon.
+
+The API receives `consent: true` only after the human agrees to this exact notice.
+
+## Demo post requirements
+
+The human posts this on X; the agent must not publish it. The post must:
+
+- say the project was built at NEAR HACKATHON;
+- tag `@NEARProtocol` and `#NEARHackathon` (`@NearLegion` and `@NearBuilders` optional);
+- attach the demo video or screenshots;
+- lead with the user problem, show one complete moment, explain NEAR’s role concretely, and give a next step (the live link and repo).
+
+The first tweet must stay under 280 weighted characters. The draft below is ~271.
 
 ## X thread draft
-
-The human author must post this; the coding agent must not publish on their behalf.
 
 ### Tweet 1
 
 ```text
-A newsroom run by autonomous agents: three desks pitch, an editor commissions two, a standards desk checks every claim — and they get paid on NEAR.
+AI news is opaque: you can't see what was checked or who was paid.
 
-Built at NEAR HACKATHON: The Daily Swarm (AI Swarms track).
+The Daily Swarm: auditable AI newsroom. Agents pitch, a standards desk checks every claim, and readers pay on NEAR.
+
+Built at NEAR HACKATHON.
 
 https://the-daily-swarm.vercel.app
-
 [VIDEO]
-
 @NEARProtocol #NEARHackathon
 ```
 
-Attach the video to tweet 1 and remove the `[VIDEO]` marker before posting. The first tweet must remain under 280 characters; the draft is ~272 by X's weighted count.
+Attach the video to tweet 1 and remove the `[VIDEO]` marker before posting.
 
 ### Tweet 2
 
 ```text
-How it works: three desks pitch with a fee and word count; the editor commissions two under a budget; a standards desk checks every claim; readers unlock with 1 testnet NEAR; the split settles to agent sub-accounts.
+Three desks pitch with a fee and word count; the editor commissions two under a budget; a standards desk checks every claim; readers unlock with 1 testnet NEAR; the split settles to agent sub-accounts.
 
-Sample: https://the-daily-swarm.vercel.app/sample
+Built for the AI Swarms track. Sample (no wallet): https://the-daily-swarm.vercel.app/sample
 ```
 
 ### Tweet 3
@@ -107,36 +148,37 @@ Repo: https://github.com/chaoticpunk/the-daily-swarm
 
 - [x] Repository is public
 - [x] CI is green on the latest `main`
-- [x] Live demo is reachable
+- [x] Live demo and `/sample` are reachable
 - [x] Fresh clone builds and tests without `.env.local`
-- [x] Sample edition added to the repository
-- [x] Sample edition deployed; live `/sample` returns 200
-- [x] Live LLM smoke test passed (`/api/agent/pitch`, production key)
+- [x] 48 tests; production build passes
+- [x] No secrets tracked
+- [x] MIT license
+- [x] Code written in the hackathon window
+- [x] Testnet-only is allowed
+- [x] README has a judge quick start
+- [ ] Team lead and email filled in
+- [ ] Mainnet NEAR payout account filled in
 - [ ] Demo video recorded
-- [ ] X thread posted by the human author; first tweet contains the video
-- [ ] Form submitted with the repository link and the demo post link
-- [ ] `website` left empty in the form
-- [ ] Track selection: AI Swarms, plus Autonomous Business only if the description supports it
-- [ ] Team size is exact
-- [ ] Cross-disclosure resolved (see below)
-- [ ] The same repository is not submitted twice
-- [ ] Repository remains public through judging
-
-## Cross-disclosure
-
-The official FAQ: one person can enter up to 2 different projects if they are independent and each README names the other one.
-
-- If `sealed-ledger` is **also submitted** to NEAR Hackathon 2026, add a line naming The Daily Swarm to the Sealed Ledger README before submitting. Track separation alone does not exempt the rule.
-- If `sealed-ledger` is **not submitted** to this hackathon, this item does not apply.
-
-The Daily Swarm README already names Sealed Ledger.
+- [ ] X thread posted by the human; first tweet has the video
+- [ ] Demo post URL copied into the form/API payload
+- [ ] Tracks selected: `["swarms", "business"]` (or `["swarms"]`)
+- [ ] API `size` set to `"1"`
+- [ ] `idea` copied from the block above
+- [ ] `website` left empty
+- [ ] Consent notice read and agreed
+- [ ] Full JSON payload printed and human said yes
+- [ ] Submission sent once; 201 received
+- [ ] Demo and repository stay public through 2026-11-18
 
 ## Demo operations and key safety
 
 - The public deployment uses the author’s LLM key. There is no auth or rate limiting. Set a hard provider spend cap, monitor usage, and rotate the key after judging.
 - Never commit `.env.local`. Only `.env.example` is tracked.
 - Keep the public instance in `LOCAL · NOT ON-CHAIN` payout mode unless the payout route is protected by auth, rate limiting, and durable replay protection.
+- Do not create or invent a NEAR payout account for the human. Do not paste a private key into the form or the demo.
 
 ## Deadline
 
-Development ends **14 Nov 2026 · 23:59 UTC**. Judging and results: 16–18 Nov 2026. The form can be corrected after submission through the Request changes page.
+- Development ends **2026-11-14T23:59:00Z**.
+- Judging starts **2026-11-16T00:00:00Z**; results by **2026-11-18T23:59:00Z**.
+- Keep the repository and demo up through judging. If a saved submission has a mistake, use <https://nearhackathon.com/request-changes>; do not submit again.

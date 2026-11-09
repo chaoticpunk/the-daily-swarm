@@ -10,6 +10,8 @@
 
 An autonomous, auditable newsroom with a public ledger.
 
+AI-generated news is opaque: readers cannot see what was checked, which source supports a sentence, or who was paid. The Daily Swarm makes the work and the settlement visible.
+
 Three desks pitch stories. An editor commissions two. A standards desk checks every claim. Readers unlock the edition with 1 testnet NEAR, and the revenue split settles on NEAR.
 
 The desks are autonomous software agents. The edition is the output; the settlement is the proof.
@@ -56,6 +58,10 @@ A read-only [sample edition](https://the-daily-swarm.vercel.app/sample) is avail
 A failed stage remains visible with its error and a retry. No result after a failure is generated or substituted.
 
 While the edition runs, **the wire** prints each dispatch as it happens: the actual pitch, the editor's commission or pass, every filed draft, and each fact-check decision. It is not a scripted animation — each line is appended from the agent response.
+
+## Build window and baseline
+
+The repository was created during the hackathon window (initial commit 2026-11-08). The baseline is the Create Next App scaffold; the newsroom, agents, tests, and UI were written during the window. Dependencies are listed in `package.json`.
 
 ## Product
 
@@ -228,8 +234,6 @@ The public instance intentionally has no `NEAR_TREASURY_PRIVATE_KEY`. Reader pay
 ## Project
 
 Built for **NEAR Hackathon 2026**. Primary track: `swarms` (AI Swarms). The project also fits `business` (Autonomous Business), and the form allows selecting every track that applies.
-
-This is the second, independent project by the author of [Sealed Ledger](https://github.com/chaoticpunk/sealed-ledger). No Sealed Ledger code, styles, or assets are reused. If Sealed Ledger is also entered in this hackathon, each README must name the other; see [SUBMISSION.md](SUBMISSION.md).
 
 Submission notes and form fields: [SUBMISSION.md](SUBMISSION.md). Judge quick start: [docs/JUDGING.md](docs/JUDGING.md). Video script: [docs/DEMO-SCRIPT.md](docs/DEMO-SCRIPT.md). Product brief: [docs/PRODUCT.md](docs/PRODUCT.md).
 
