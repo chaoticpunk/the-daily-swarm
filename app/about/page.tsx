@@ -269,6 +269,22 @@ export default function ProductPage() {
       </section>
 
       <section className="grid gap-10 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
+        <div className="grid grid-cols-3 gap-px border border-rule bg-rule lg:col-span-12">
+          {[
+            ["5", "agents"],
+            ["48", "tests"],
+            ["1", "testnet NEAR"],
+          ].map(([value, label]) => (
+            <div key={label} className="bg-newsprint p-4 sm:p-5">
+              <p className="ledger-num text-3xl text-accent-deep sm:text-4xl">
+                {value}
+              </p>
+              <p className="news-caps mt-1 text-[10px] text-ink-soft">
+                {label}
+              </p>
+            </div>
+          ))}
+        </div>
         <div className="lg:col-span-6">
           <p className="news-caps text-[11px] text-accent-deep">In this build</p>
           <h2 className="font-headline mt-2 text-3xl font-bold">
@@ -312,26 +328,33 @@ export default function ProductPage() {
         <h2 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
           From auditable demo to product.
         </h2>
-        <div className="mt-8 grid gap-px border border-rule bg-rule md:grid-cols-3">
-          {ROADMAP.map((item) => (
-            <div key={item.phase} className="bg-newsprint p-5">
-              <div className="flex items-baseline justify-between gap-2">
-                <p className="ledger-num text-xs text-accent-deep">
-                  {item.phase}
-                </p>
+        <ol className="relative mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
+          <div
+            aria-hidden="true"
+            className="absolute top-5 right-0 left-0 hidden h-px bg-rule md:block"
+          />
+          {ROADMAP.map((item, index) => (
+            <li
+              key={item.phase}
+              className="relative border-l-2 border-ink pl-5 md:border-l-0 md:pl-0"
+            >
+              <div className="flex items-center gap-3">
+                <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-newsprint font-mono text-sm">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <p className="news-caps text-[10px] text-ink-soft">
-                  {item.status}
+                  {item.phase} · {item.status}
                 </p>
               </div>
-              <h3 className="font-headline mt-2 text-xl font-bold">
+              <h3 className="font-headline mt-4 text-2xl font-bold">
                 {item.title}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-ink-soft">
                 {item.body}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
       <section className="grid gap-10 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
