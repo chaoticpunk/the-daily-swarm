@@ -1,4 +1,5 @@
 import type { Agent } from "@/lib/types";
+import { beatStyle } from "@/lib/ui/beat-style";
 import {
   AGENT_STATUS_LABEL,
   cn,
@@ -32,30 +33,40 @@ export function AgentCard({
     .map((part) => part[0])
     .join("")
     .slice(0, 2);
+  const beat = beatStyle(agent.beat);
+  const avatarClass =
+    agent.role === "editor"
+      ? "border-accent bg-accent text-white"
+      : agent.role === "fact_checker"
+        ? "border-ink bg-ink text-newsprint"
+        : (beat?.avatar ?? "border-rule bg-newsprint-deep text-ink");
+  const topBar =
+    agent.role === "editor"
+      ? "bg-accent"
+      : agent.role === "fact_checker"
+        ? "bg-ink"
+        : (beat?.bar ?? "bg-ink");
 
   return (
     <article className="paper-panel flex h-full flex-col p-3">
+      <div className={cn("-mx-3 -mt-3 mb-3 h-1", topBar)} aria-hidden="true" />
       <div className="flex items-start gap-3">
         <span
           aria-hidden="true"
           className={cn(
             "font-headline flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-sm font-bold",
-            agent.role === "editor"
-              ? "border-accent bg-accent text-white"
-              : agent.role === "fact_checker"
-                ? "border-ink bg-ink text-newsprint"
-                : "border-rule bg-newsprint-deep text-ink",
+            avatarClass,
           )}
         >
           {initials}
         </span>
         <div className="min-w-0 flex-1">
           <h3 className="text-sm font-bold leading-tight break-words">{agent.name}</h3>
-          <p className="news-caps mt-1 text-[8px] text-ink-soft">{agent.desk}</p>
+          <p className="news-caps mt-1 text-[10px] text-ink-soft">{agent.desk}</p>
         </div>
         <span
           className={cn(
-            "news-caps inline-flex shrink-0 items-center gap-1.5 px-2 py-1 text-[8px]",
+            "news-caps inline-flex shrink-0 items-center gap-1.5 px-2 py-1 text-[10px]",
             STATUS_STYLES[agent.status],
           )}
         >
@@ -72,7 +83,7 @@ export function AgentCard({
 
       <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 border-t border-rule-soft pt-2 text-[11px]">
         <div>
-          <dt className="news-caps text-[8px] text-ink-soft">Balance</dt>
+          <dt className="news-caps text-[10px] text-ink-soft">Balance</dt>
           <dd className="ledger-num mt-0.5">
             {balancesState === "loading" || balancesState === "idle" ? (
               <span className="text-ink-soft">reading…</span>
@@ -84,7 +95,7 @@ export function AgentCard({
           </dd>
         </div>
         <div>
-          <dt className="news-caps text-[8px] text-ink-soft">
+          <dt className="news-caps text-[10px] text-ink-soft">
             {agent.role === "reporter" ? "Editorial budget" : "Role budget"}
           </dt>
           <dd className="ledger-num mt-0.5">
@@ -100,7 +111,7 @@ export function AgentCard({
         href={explorerAccountUrl(agent.accountId)}
         target="_blank"
         rel="noreferrer"
-        className="ledger-num mt-2 block truncate text-[10px] text-ink-soft underline decoration-rule hover:text-accent-deep"
+        className="ledger-num mt-2 block truncate text-[11px] text-ink-soft underline decoration-rule hover:text-accent-deep"
         title={`${agent.accountId} on the NEAR testnet explorer`}
       >
         {shortAccount(agent.accountId, 14, 5)}

@@ -96,7 +96,7 @@ export function PaywallPanel({
       className="paper-panel border-2 border-ink p-0"
     >
       <div className="border-b-2 border-dashed border-rule bg-ink px-5 py-4 text-newsprint">
-        <p className="news-caps text-[9px] text-gold">Reader access</p>
+        <p className="news-caps text-[10px] text-gold">Reader access</p>
         <h2 id="paywall-heading" className="font-headline mt-1 text-2xl font-bold">
           Unlock the edition
         </h2>
@@ -112,7 +112,7 @@ export function PaywallPanel({
             {READER_PRICE_NEAR}
             <span className="ml-1 text-sm font-normal">NEAR</span>
           </p>
-          <p className="text-right text-[10px] leading-tight text-ink-soft">
+          <p className="text-right text-[11px] leading-tight text-ink-soft">
             testnet only
             <br />
             no real money
@@ -131,7 +131,7 @@ export function PaywallPanel({
           {wallet.accountId ? (
             <div className="flex flex-wrap items-center justify-between gap-2 border border-rule bg-newsprint px-3 py-2">
               <div>
-                <p className="news-caps text-[8px] text-ink-soft">Connected reader</p>
+                <p className="news-caps text-[10px] text-ink-soft">Connected reader</p>
                 <p className="ledger-num mt-1 text-[11px]" title={wallet.accountId}>
                   {shortAccount(wallet.accountId, 16, 6)}
                 </p>
@@ -139,7 +139,7 @@ export function PaywallPanel({
               <button
                 type="button"
                 onClick={wallet.connect}
-                className="news-caps border border-ink px-2 py-1.5 text-[8px] hover:border-accent hover:text-accent-deep"
+                className="news-caps border border-ink px-2 py-1.5 text-[10px] hover:border-accent hover:text-accent-deep"
               >
                 Change wallet
               </button>
@@ -149,7 +149,7 @@ export function PaywallPanel({
               type="button"
               onClick={wallet.connect}
               disabled={busy}
-              className="news-caps w-full bg-accent px-4 py-3 text-[10px] text-white transition-colors hover:bg-accent-deep disabled:cursor-not-allowed disabled:bg-newsprint-deep disabled:text-ink-soft"
+              className="news-caps w-full bg-accent px-4 py-3 text-[11px] text-white transition-colors hover:bg-accent-deep disabled:cursor-not-allowed disabled:bg-newsprint-deep disabled:text-ink-soft"
             >
               {wallet.status === "loading"
                 ? "Starting NEAR wallet…"
@@ -158,7 +158,7 @@ export function PaywallPanel({
           )}
 
           {wallet.error ? (
-            <p className="mt-2 text-[10px] leading-relaxed text-accent-deep">
+            <p className="mt-2 text-[11px] leading-relaxed text-accent-deep">
               {wallet.error}
             </p>
           ) : null}
@@ -168,7 +168,7 @@ export function PaywallPanel({
               type="button"
               onClick={() => void handlePay()}
               disabled={busy || wallet.isPaying}
-              className="news-caps mt-3 w-full bg-ink px-4 py-3 text-[10px] text-newsprint transition-colors hover:bg-accent-deep disabled:cursor-not-allowed disabled:bg-newsprint-deep disabled:text-ink-soft"
+              className="news-caps mt-3 w-full bg-ink px-4 py-3 text-[11px] text-newsprint transition-colors hover:bg-accent-deep disabled:cursor-not-allowed disabled:bg-newsprint-deep disabled:text-ink-soft"
             >
               {busy
                 ? stage === "verifying"
@@ -177,14 +177,14 @@ export function PaywallPanel({
                 : `Pay ${READER_PRICE_NEAR} NEAR and unlock`}
             </button>
           ) : (
-            <p className="mt-3 border-t border-rule-soft pt-3 text-[10px] leading-relaxed text-ink-soft">
+            <p className="mt-3 border-t border-rule-soft pt-3 text-[11px] leading-relaxed text-ink-soft">
               Connect a NEAR testnet wallet to pay. The wallet will ask you to send{" "}
               {READER_PRICE_NEAR} testnet NEAR to the treasury; the edition unlocks
               only after the server verifies the final transaction.
             </p>
           )}
 
-          <p className="mt-2 text-[9px] leading-relaxed text-ink-soft">
+          <p className="mt-2 text-[10px] leading-relaxed text-ink-soft">
             Payment settles to{" "}
             <span className="ledger-num" title={treasury}>
               {shortAccount(treasury)}
@@ -192,7 +192,7 @@ export function PaywallPanel({
             on NEAR testnet. The edition unlocks after NEAR confirms the transfer.
           </p>
           {actionError ? (
-            <p role="alert" className="mt-2 text-[10px] leading-relaxed text-accent-deep">
+            <p role="alert" className="mt-2 text-[11px] leading-relaxed text-accent-deep">
               {actionError}
             </p>
           ) : null}
@@ -205,7 +205,7 @@ export function PaywallPanel({
             type="button"
             aria-expanded={showManual}
             onClick={() => setShowManual((value) => !value)}
-            className="news-caps text-[9px] text-ink-soft underline decoration-rule hover:text-accent-deep"
+            className="news-caps text-[10px] text-ink-soft underline decoration-rule hover:text-accent-deep"
           >
             {showManual ? "Hide transfer verification" : "Already paid? Verify a transfer"}
           </button>
@@ -213,7 +213,7 @@ export function PaywallPanel({
           {showManual ? (
             <form onSubmit={handleManualVerify} className="mt-3 space-y-2">
               <div>
-                <label htmlFor="manual-tx" className="news-caps text-[8px] text-ink-soft">
+                <label htmlFor="manual-tx" className="news-caps text-[10px] text-ink-soft">
                   Transaction hash
                 </label>
                 <input
@@ -228,7 +228,7 @@ export function PaywallPanel({
                 />
               </div>
               <div>
-                <label htmlFor="manual-sender" className="news-caps text-[8px] text-ink-soft">
+                <label htmlFor="manual-sender" className="news-caps text-[10px] text-ink-soft">
                   Sender account
                 </label>
                 <input
@@ -245,12 +245,12 @@ export function PaywallPanel({
               <button
                 type="submit"
                 disabled={busy}
-                className="news-caps w-full border border-ink px-3 py-2 text-[9px] hover:border-accent hover:text-accent-deep disabled:cursor-not-allowed disabled:opacity-50"
+                className="news-caps w-full border border-ink px-3 py-2 text-[10px] hover:border-accent hover:text-accent-deep disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Verify payment
               </button>
               {manualError ? (
-                <p role="alert" className="text-[10px] leading-relaxed text-accent-deep">
+                <p role="alert" className="text-[11px] leading-relaxed text-accent-deep">
                   {manualError}
                 </p>
               ) : null}
@@ -260,8 +260,8 @@ export function PaywallPanel({
 
         {canRetrySettlement ? (
           <div className="mt-4 border-l-2 border-gold bg-gold/10 p-3">
-            <p className="news-caps text-[9px]">Payment verified · settlement incomplete</p>
-            <p className="mt-1 text-[10px] leading-relaxed text-ink-soft">
+            <p className="news-caps text-[10px]">Payment verified · settlement incomplete</p>
+            <p className="mt-1 text-[11px] leading-relaxed text-ink-soft">
               The edition is unlocked. You can retry the payout split without paying
               again.
             </p>
@@ -269,7 +269,7 @@ export function PaywallPanel({
               type="button"
               onClick={() => void onRetrySettlement()}
               disabled={busy}
-              className="news-caps mt-2 border border-ink px-3 py-2 text-[9px] hover:border-accent hover:text-accent-deep disabled:opacity-50"
+              className="news-caps mt-2 border border-ink px-3 py-2 text-[10px] hover:border-accent hover:text-accent-deep disabled:opacity-50"
             >
               Retry settlement
             </button>
@@ -278,7 +278,7 @@ export function PaywallPanel({
       </div>
 
       <div className="border-t border-rule bg-newsprint-deep px-5 py-3">
-        <p className="news-caps text-[8px] text-ink-soft">
+        <p className="news-caps text-[10px] text-ink-soft">
           Demo edition · curated sources · testnet only
         </p>
       </div>
@@ -296,7 +296,7 @@ function paywallStatus(
     return (
       <p
         role="status"
-        className="mt-3 border-l-2 border-success bg-success/5 px-3 py-2 text-[10px] leading-relaxed text-success"
+        className="mt-3 border-l-2 border-success bg-success/5 px-3 py-2 text-[11px] leading-relaxed text-success"
       >
         Payment verified on NEAR testnet. The edition is unlocked.
       </p>
@@ -306,7 +306,7 @@ function paywallStatus(
     return (
       <p
         role="alert"
-        className="mt-3 border-l-2 border-accent bg-accent/5 px-3 py-2 text-[10px] leading-relaxed text-accent-deep"
+        className="mt-3 border-l-2 border-accent bg-accent/5 px-3 py-2 text-[11px] leading-relaxed text-accent-deep"
       >
         {error ?? "Payment verification failed. The edition stays locked."}
       </p>
@@ -316,7 +316,7 @@ function paywallStatus(
     return (
       <p
         aria-live="polite"
-        className="mt-3 border-l-2 border-gold bg-gold/10 px-3 py-2 text-[10px] leading-relaxed"
+        className="mt-3 border-l-2 border-gold bg-gold/10 px-3 py-2 text-[11px] leading-relaxed"
       >
         {stage === "verifying"
           ? "Checking the transaction against NEAR RPC. This can take a few seconds."

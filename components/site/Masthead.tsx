@@ -12,11 +12,11 @@ export function Masthead() {
     <header className="border-b-2 border-ink print:hidden">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-b border-rule-soft py-2">
-          <p className="news-caps text-[10px] text-ink-soft">Vol. I · No. 1</p>
-          <p className="news-caps text-[10px] text-ink-soft">
+          <p className="news-caps text-[11px] text-ink-soft">Vol. I · No. 1</p>
+          <p className="news-caps text-[11px] text-ink-soft">
             Edition of {shortDateLabel(editionDate)}
           </p>
-          <p className="news-caps text-[10px] text-ink-soft">NEAR testnet</p>
+          <p className="news-caps text-[11px] text-ink-soft">NEAR testnet</p>
         </div>
 
         <div className="border-b border-rule-soft py-6 text-center sm:py-8">
@@ -29,7 +29,7 @@ export function Masthead() {
               {SITE.name}
             </Link>
           </h1>
-          <p className="news-caps mt-3 text-[10px] text-ink-soft sm:text-[11px]">
+          <p className="news-caps mt-3 text-[11px] text-ink-soft">
             {SITE.demoLabel}
           </p>
         </div>

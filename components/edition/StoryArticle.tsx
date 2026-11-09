@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 import { getAgentConfig } from "@/lib/config";
 import { getFactById } from "@/lib/content/pack";
 import type { FactCheckVerdict, Story } from "@/lib/types";
+import { BEAT_STYLE } from "@/lib/ui/beat-style";
 import { cn, formatNear, markdownPreview } from "@/lib/utils";
 
 const VERDICT_LABEL: Record<FactCheckVerdict, string> = {
@@ -68,12 +69,19 @@ export function StoryArticle({
     <article id={story.id} className="border-b-2 border-ink pb-8 last:border-b-0">
       <header>
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="news-caps text-[9px] text-accent-deep">
+          <p className="news-caps flex flex-wrap items-center gap-1.5 text-[10px] text-accent-deep">
+            <span
+              aria-hidden="true"
+              className={cn(
+                "inline-block h-2 w-2 rounded-full",
+                BEAT_STYLE[story.assignment.beat].dot,
+              )}
+            />
             {order === 1 ? "Front page · lead story" : "Front page"} · {agent?.desk}
           </p>
           <p
             className={cn(
-              "news-caps px-2 py-1 text-[8px]",
+              "news-caps px-2 py-1 text-[10px]",
               status.tone === "ok" && "bg-success/10 text-success",
               status.tone === "warn" && "bg-gold/30 text-ink",
               status.tone === "bad" && "bg-accent/10 text-accent-deep",
@@ -131,10 +139,10 @@ export function StoryArticle({
           >
             <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
               <div>
-                <p className="news-caps text-[9px] text-accent-deep">
+                <p className="news-caps text-[10px] text-accent-deep">
                   The standards desk
                 </p>
-                <p className="ledger-num mt-1 text-[9px] leading-snug text-ink-soft">
+                <p className="ledger-num mt-1 text-[10px] leading-snug text-ink-soft">
                   {finalCheck.checks.length} checks · {supportedCount} supported ·{" "}
                   {unsupportedCount} flagged
                   {contextCount > 0 ? ` · ${contextCount} need context` : ""}
@@ -164,7 +172,7 @@ export function StoryArticle({
                   <div className="flex items-start gap-2">
                     <span
                       className={cn(
-                        "news-caps mt-0.5 shrink-0 px-1.5 py-0.5 text-[7px]",
+                        "news-caps mt-0.5 shrink-0 px-1.5 py-0.5 text-[10px]",
                         VERDICT_STYLE[check.verdict],
                       )}
                     >
@@ -172,7 +180,7 @@ export function StoryArticle({
                     </span>
                     <p className="text-[11px] leading-snug">{check.claim}</p>
                   </div>
-                  <p className="mt-1.5 text-[10px] leading-snug text-ink-soft">
+                  <p className="mt-1.5 text-[11px] leading-snug text-ink-soft">
                     {check.note}{" "}
                     <span className="ledger-num text-accent-deep">
                       [{check.sourceId}]
@@ -185,7 +193,7 @@ export function StoryArticle({
 
           <div className="mt-4 grid gap-4 border-t border-rule pt-4 md:grid-cols-2">
             <details className="group">
-              <summary className="news-caps cursor-pointer list-none text-[9px] text-ink-soft hover:text-accent-deep">
+              <summary className="news-caps cursor-pointer list-none text-[10px] text-ink-soft hover:text-accent-deep">
                 Sources · {sources.length} cited{" "}
                 <span aria-hidden="true" className="group-open:hidden">
                   +
@@ -202,7 +210,7 @@ export function StoryArticle({
                     >
                       {source.sourceTitle} ↗
                     </a>
-                    <p className="ledger-num mt-0.5 text-[9px] text-ink-soft">
+                    <p className="ledger-num mt-0.5 text-[10px] text-ink-soft">
                       {source.id}
                     </p>
                   </li>
@@ -211,7 +219,7 @@ export function StoryArticle({
             </details>
 
             <details className="group">
-              <summary className="news-caps cursor-pointer list-none text-[9px] text-ink-soft hover:text-accent-deep">
+              <summary className="news-caps cursor-pointer list-none text-[10px] text-ink-soft hover:text-accent-deep">
                 Every claim mapped to a source{" "}
                 <span aria-hidden="true" className="group-open:hidden">
                   +
@@ -231,12 +239,12 @@ export function StoryArticle({
                           href={fact.sourceUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="ledger-num text-[9px] text-accent-deep underline decoration-rule"
+                          className="ledger-num text-[10px] text-accent-deep underline decoration-rule"
                         >
                           [{claim.sourceId}] ↗
                         </a>
                       ) : (
-                        <span className="ledger-num text-[9px] text-accent-deep">
+                        <span className="ledger-num text-[10px] text-accent-deep">
                           [{claim.sourceId}]
                         </span>
                       )}
@@ -260,7 +268,7 @@ export function StoryArticle({
               {markdownPreview(finalDraft.bodyMarkdown.slice(300), 300)}
             </p>
           </div>
-          <p className="news-caps mt-2 text-[9px] text-accent-deep">
+          <p className="news-caps mt-2 text-[10px] text-accent-deep">
             Full text, sources, and fact-check report locked
           </p>
         </div>

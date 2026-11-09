@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/config";
+import { BEAT_STYLE, BEATS } from "@/lib/ui/beat-style";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Product",
@@ -74,6 +76,29 @@ const MODEL = [
   },
 ];
 
+const PIPELINE = [
+  {
+    title: "Pitch",
+    body: "Three desks file a headline, a fee, a word count, and claims tied to the source pack.",
+    dots: BEATS.map((beat) => BEAT_STYLE[beat].dot),
+  },
+  {
+    title: "Commission",
+    body: "The editor commissions two under a fixed budget and records why the third was passed.",
+    dots: ["bg-accent"],
+  },
+  {
+    title: "Check",
+    body: "The standards desk checks every claim. An unsupported claim forces one revision and a re-check.",
+    dots: ["bg-success"],
+  },
+  {
+    title: "Settle",
+    body: "A reader pays 1 testnet NEAR. The deterministic split settles to agent sub-accounts and lands in the public ledger.",
+    dots: ["bg-gold ring-1 ring-ink/20"],
+  },
+];
+
 const RISKS = [
   {
     title: "Copyright and licensing",
@@ -97,7 +122,7 @@ export default function ProductPage() {
   return (
     <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
       <section className="border-b-2 border-ink py-10 lg:py-16">
-        <p className="news-caps text-[10px] text-accent-deep">
+        <p className="news-caps text-[11px] text-accent-deep">
           Product brief · NEAR Hackathon 2026 · AI Swarms
         </p>
         <h1 className="font-headline mt-5 max-w-5xl text-[2.6rem] leading-[1.02] font-bold tracking-[-0.025em] sm:text-5xl lg:text-[4rem]">
@@ -134,9 +159,68 @@ export default function ProductPage() {
         </div>
       </section>
 
+      <section className="border-b border-rule py-10 lg:py-14">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="news-caps text-[11px] text-accent-deep">
+              One edition, four moves
+            </p>
+            <h2 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
+              From pitch to proof.
+            </h2>
+          </div>
+          <p className="max-w-md text-sm leading-relaxed text-ink-soft">
+            The agents do the work; the colors show who did it. Beat colors mark
+            the three desks, red is the editor, green is the standards desk, and
+            gold is the settlement.
+          </p>
+        </div>
+        <ol className="mt-8 grid gap-px border border-rule bg-rule md:grid-cols-4">
+          {PIPELINE.map((step, index) => (
+            <li key={step.title} className="bg-newsprint p-5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  {step.dots.map((dot) => (
+                    <span
+                      key={dot}
+                      aria-hidden="true"
+                      className={cn("inline-block h-2.5 w-2.5 rounded-full", dot)}
+                    />
+                  ))}
+                </div>
+                <span className="ledger-num text-[11px] text-ink-soft">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 className="font-headline mt-3 text-xl font-bold">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                {step.body}
+              </p>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-3 flex flex-wrap items-center gap-4 text-[11px] text-ink-soft">
+          <span className="news-caps text-[11px]">Beat colors</span>
+          {BEATS.map((beat) => (
+            <span key={beat} className="inline-flex items-center gap-1.5">
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "inline-block h-2 w-2 rounded-full",
+                  BEAT_STYLE[beat].dot,
+                )}
+              />
+              {BEAT_STYLE[beat].label}
+            </span>
+          ))}
+        </div>
+      </section>
+
       <section className="grid gap-10 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
         <div className="lg:col-span-5">
-          <p className="news-caps text-[10px] text-accent-deep">The problem</p>
+          <p className="news-caps text-[11px] text-accent-deep">The problem</p>
           <h2 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
             AI news has a trust problem.
           </h2>
@@ -168,7 +252,7 @@ export default function ProductPage() {
       </section>
 
       <section className="border-b border-rule py-10 lg:py-14">
-        <p className="news-caps text-[10px] text-accent-deep">Who it is for</p>
+        <p className="news-caps text-[11px] text-accent-deep">Who it is for</p>
         <h2 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
           Three audiences, one audit trail.
         </h2>
@@ -186,14 +270,14 @@ export default function ProductPage() {
 
       <section className="grid gap-10 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
         <div className="lg:col-span-6">
-          <p className="news-caps text-[10px] text-accent-deep">In this build</p>
+          <p className="news-caps text-[11px] text-accent-deep">In this build</p>
           <h2 className="font-headline mt-2 text-3xl font-bold">
             What is real
           </h2>
           <ul className="mt-5 space-y-3">
             {REAL.map((item) => (
               <li key={item} className="flex gap-3 text-sm leading-relaxed">
-                <span className="news-caps shrink-0 text-[9px] text-success">
+                <span className="news-caps shrink-0 text-[10px] text-success">
                   ✓
                 </span>
                 <span>{item}</span>
@@ -202,14 +286,14 @@ export default function ProductPage() {
           </ul>
         </div>
         <div className="lg:col-span-6 lg:border-l lg:border-rule lg:pl-6">
-          <p className="news-caps text-[10px] text-accent-deep">Still demo</p>
+          <p className="news-caps text-[11px] text-accent-deep">Still demo</p>
           <h2 className="font-headline mt-2 text-3xl font-bold">
             What is next
           </h2>
           <ul className="mt-5 space-y-3">
             {DEMO.map((item) => (
               <li key={item} className="flex gap-3 text-sm leading-relaxed">
-                <span className="news-caps shrink-0 text-[9px] text-ink-soft">
+                <span className="news-caps shrink-0 text-[10px] text-ink-soft">
                   —
                 </span>
                 <span>{item}</span>
@@ -224,7 +308,7 @@ export default function ProductPage() {
       </section>
 
       <section className="border-b border-rule py-10 lg:py-14">
-        <p className="news-caps text-[10px] text-accent-deep">The path</p>
+        <p className="news-caps text-[11px] text-accent-deep">The path</p>
         <h2 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
           From auditable demo to product.
         </h2>
@@ -235,7 +319,7 @@ export default function ProductPage() {
                 <p className="ledger-num text-xs text-accent-deep">
                   {item.phase}
                 </p>
-                <p className="news-caps text-[8px] text-ink-soft">
+                <p className="news-caps text-[10px] text-ink-soft">
                   {item.status}
                 </p>
               </div>
@@ -252,7 +336,7 @@ export default function ProductPage() {
 
       <section className="grid gap-10 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
         <div className="lg:col-span-5">
-          <p className="news-caps text-[10px] text-accent-deep">Business model</p>
+          <p className="news-caps text-[11px] text-accent-deep">Business model</p>
           <h2 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
             The ledger is the trust layer.
           </h2>
@@ -276,7 +360,7 @@ export default function ProductPage() {
 
       <section className="grid gap-10 border-b border-rule py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
         <div className="lg:col-span-5">
-          <p className="news-caps text-[10px] text-accent-deep">
+          <p className="news-caps text-[11px] text-accent-deep">
             Moat and risks
           </p>
           <h2 className="font-headline mt-2 text-3xl font-bold sm:text-4xl">
@@ -301,7 +385,7 @@ export default function ProductPage() {
       </section>
 
       <section className="mb-8 border-y-2 border-ink bg-gold/25 px-5 py-8 text-center sm:px-8">
-        <p className="news-caps text-[10px] text-accent-deep">
+        <p className="news-caps text-[11px] text-accent-deep">
           See the product
         </p>
         <p className="font-headline mx-auto mt-3 max-w-3xl text-2xl leading-snug font-bold sm:text-3xl">

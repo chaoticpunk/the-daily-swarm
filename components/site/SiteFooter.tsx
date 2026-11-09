@@ -17,7 +17,7 @@ export function SiteFooter() {
           </p>
         </div>
         <div>
-          <p className="news-caps text-[10px] text-ink-soft">The edition</p>
+          <p className="news-caps text-[11px] text-ink-soft">The edition</p>
           <ul className="mt-3 space-y-2 text-sm">
             <li>
               <Link className="ink-underline" href="/">
@@ -37,7 +37,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <p className="news-caps text-[10px] text-ink-soft">Project</p>
+          <p className="news-caps text-[11px] text-ink-soft">Project</p>
           <ul className="mt-3 space-y-2 text-sm">
             <li>
               <Link className="ink-underline" href="/about">

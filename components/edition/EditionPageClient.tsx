@@ -293,7 +293,7 @@ export function EditionPageClient() {
   if (pageState === "loading") {
     return (
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8" aria-live="polite">
-        <p className="news-caps text-[10px] text-accent-deep">Loading edition</p>
+        <p className="news-caps text-[11px] text-accent-deep">Loading edition</p>
         <div className="mt-4 space-y-3" aria-hidden="true">
           <div className="h-8 w-2/3 bg-newsprint-deep" />
           <div className="h-4 w-1/2 bg-newsprint-deep" />
@@ -341,16 +341,16 @@ export function EditionPageClient() {
     <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
       <header className="border-b-2 border-ink py-7">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-rule-soft pb-3">
-          <p className="news-caps text-[10px] text-ink-soft">
+          <p className="news-caps text-[11px] text-ink-soft">
             {editionDateLabel(edition.date)}
           </p>
-          <p className="news-caps text-[9px] text-ink-soft">{SITE.demoLabel}</p>
+          <p className="news-caps text-[10px] text-ink-soft">{SITE.demoLabel}</p>
           <div className="flex flex-wrap items-center gap-2">
             <p
               className={
                 unlocked
-                  ? "news-caps bg-success/10 px-2 py-1 text-[9px] text-success"
-                  : "news-caps bg-gold/30 px-2 py-1 text-[9px] text-ink"
+                  ? "news-caps bg-success/10 px-2 py-1 text-[10px] text-success"
+                  : "news-caps bg-gold/30 px-2 py-1 text-[10px] text-ink"
               }
               role="status"
             >
@@ -360,7 +360,7 @@ export function EditionPageClient() {
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="news-caps border border-ink px-2.5 py-1 text-[8px] hover:border-accent hover:text-accent-deep print:hidden"
+                className="news-caps border border-ink px-2.5 py-1 text-[10px] hover:border-accent hover:text-accent-deep print:hidden"
               >
                 Print edition
               </button>
@@ -370,7 +370,7 @@ export function EditionPageClient() {
 
         <div className="mt-5 grid gap-5 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <p className="news-caps text-[10px] text-accent-deep">
+            <p className="news-caps text-[11px] text-accent-deep">
               Edition · curated sources
             </p>
             <h1 className="font-headline mt-2 text-4xl leading-[0.98] font-bold tracking-tight sm:text-5xl lg:text-6xl">
@@ -384,7 +384,7 @@ export function EditionPageClient() {
             {!unlocked ? (
               <a
                 href="#unlock"
-                className="news-caps mt-4 inline-flex bg-ink px-4 py-2.5 text-[10px] text-newsprint hover:bg-accent-deep print:hidden"
+                className="news-caps mt-4 inline-flex bg-ink px-4 py-2.5 text-[11px] text-newsprint hover:bg-accent-deep print:hidden"
               >
                 Unlock with {READER_PRICE_NEAR} testnet NEAR ↓
               </a>
@@ -398,7 +398,7 @@ export function EditionPageClient() {
               ["Fees", `${formatNear(assignmentFees)} NEAR`],
             ].map(([label, value]) => (
               <div key={label}>
-                <dt className="news-caps text-[8px] text-ink-soft">{label}</dt>
+                <dt className="news-caps text-[10px] text-ink-soft">{label}</dt>
                 <dd className="ledger-num mt-1 text-sm">{value}</dd>
               </div>
             ))}
@@ -429,7 +429,7 @@ export function EditionPageClient() {
         className="grid gap-6 border-b border-rule py-7 lg:grid-cols-12"
       >
         <div className="lg:col-span-8">
-          <p className="news-caps text-[10px] text-accent-deep">Editor&apos;s note</p>
+          <p className="news-caps text-[11px] text-accent-deep">Editor&apos;s note</p>
           <h2 id="editors-note-heading" className="sr-only">
             Editor&apos;s note
           </h2>
@@ -445,7 +445,7 @@ export function EditionPageClient() {
           ) : null}
         </div>
         <div className="lg:col-span-4 lg:border-l lg:border-rule lg:pl-5">
-          <p className="news-caps text-[9px] text-ink-soft">Front page order</p>
+          <p className="news-caps text-[10px] text-ink-soft">Front page order</p>
           <ol className="mt-2 space-y-2">
             {stories.map((story, index) => (
               <li key={story.id} className="flex gap-3 text-xs">
@@ -458,7 +458,7 @@ export function EditionPageClient() {
               </li>
             ))}
           </ol>
-          <p className="mt-3 text-[10px] text-ink-soft">
+          <p className="mt-3 text-[11px] text-ink-soft">
             Reported, written, checked, and laid out by autonomous desks. Curated
             sources only.
           </p>
@@ -485,7 +485,7 @@ export function EditionPageClient() {
           >
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <div>
-                <p className="news-caps text-[10px] text-accent-deep">Public ledger</p>
+                <p className="news-caps text-[11px] text-accent-deep">Public ledger</p>
                 <h2
                   id="edition-ledger-heading"
                   className="font-headline mt-1 text-2xl font-bold"
@@ -493,7 +493,7 @@ export function EditionPageClient() {
                   This edition&apos;s settlement
                 </h2>
               </div>
-              <p className="ledger-num text-[10px] text-ink-soft">
+              <p className="ledger-num text-[11px] text-ink-soft">
                 {entries.length} {entries.length === 1 ? "entry" : "entries"}
               </p>
             </div>
@@ -515,7 +515,7 @@ export function EditionPageClient() {
               </div>
             )}
 
-            <p className="mt-3 text-[10px] leading-relaxed text-ink-soft">
+            <p className="mt-3 text-[11px] leading-relaxed text-ink-soft">
               The reader pays{" "}
               {edition.readerPayment
                 ? `${formatNear(edition.readerPayment.amount)} NEAR`
@@ -565,7 +565,7 @@ export function EditionPageClient() {
                   initialTxHash={returnedTxHash}
                 />
                 <div className="paper-inset p-4">
-                  <p className="news-caps text-[9px] text-ink-soft">
+                  <p className="news-caps text-[10px] text-ink-soft">
                     What unlocks
                   </p>
                   <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-ink-soft">
@@ -587,7 +587,7 @@ export function EditionPageClient() {
 function MissingEdition({ id }: { id: string }) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <p className="news-caps text-[10px] text-accent-deep">Edition not found</p>
+      <p className="news-caps text-[11px] text-accent-deep">Edition not found</p>
       <h1 className="font-headline mt-3 text-4xl leading-tight font-bold">
         This edition is not in this browser&apos;s archive.
       </h1>
@@ -600,13 +600,13 @@ function MissingEdition({ id }: { id: string }) {
       <div className="mt-6 flex flex-wrap gap-3">
         <Link
           href="/newsroom"
-          className="news-caps bg-ink px-5 py-3 text-[10px] text-newsprint hover:bg-accent-deep"
+          className="news-caps bg-ink px-5 py-3 text-[11px] text-newsprint hover:bg-accent-deep"
         >
           Produce today&apos;s edition
         </Link>
         <Link
           href="/ledger"
-          className="news-caps border border-ink px-5 py-3 text-[10px] hover:border-accent hover:text-accent-deep"
+          className="news-caps border border-ink px-5 py-3 text-[11px] hover:border-accent hover:text-accent-deep"
         >
           View the ledger
         </Link>

@@ -1,5 +1,6 @@
 import { EDITOR_BUDGET, getAgentConfig } from "@/lib/config";
 import type { Assignment, Pitch, RejectedPitch } from "@/lib/types";
+import { beatStyle } from "@/lib/ui/beat-style";
 import { cn, formatNear } from "@/lib/utils";
 
 function reporter(agentId: string) {
@@ -26,10 +27,10 @@ export function BidBoard({
   return (
     <section aria-labelledby="bid-board-heading" className="mt-6">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 id="bid-board-heading" className="news-caps text-[10px] text-accent-deep">
+        <h3 id="bid-board-heading" className="news-caps text-[11px] text-accent-deep">
           Pitch board
         </h3>
-        <p className="ledger-num text-[10px] text-ink-soft">
+        <p className="ledger-num text-[11px] text-ink-soft">
           {pitches.length} pitches · {formatNear(totalCost)} / {EDITOR_BUDGET.toFixed(2)} NEAR commissioned
         </p>
       </div>
@@ -58,6 +59,7 @@ export function BidBoard({
         <ol className="mt-3 space-y-3" aria-live="polite">
           {pitches.map((pitch) => {
             const agent = reporter(pitch.agentId);
+            const beat = beatStyle(agent?.beat);
             const isSelected = selected.has(pitch.id);
             const rejection = rejectionFor.get(pitch.id);
             return (
@@ -72,13 +74,24 @@ export function BidBoard({
                       : "border-rule",
                 )}
               >
+                <div
+                  className={cn("-mx-4 -mt-4 mb-3 h-1", beat?.bar ?? "bg-ink")}
+                  aria-hidden="true"
+                />
                 <div className="flex items-start justify-between gap-3">
-                  <p className="news-caps text-[8px] text-ink-soft">
+                  <p className="news-caps flex flex-wrap items-center gap-1.5 text-[10px] text-ink-soft">
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "inline-block h-2 w-2 rounded-full",
+                        beat?.dot ?? "bg-ink",
+                      )}
+                    />
                     {agent?.name ?? pitch.agentId} · {agent?.desk ?? "Reporter"}
                   </p>
                   <span
                     className={cn(
-                      "news-caps shrink-0 px-2 py-1 text-[8px]",
+                      "news-caps shrink-0 px-2 py-1 text-[10px]",
                       isSelected
                         ? "bg-accent text-white"
                         : rejection
@@ -100,12 +113,12 @@ export function BidBoard({
                   {pitch.angle}
                 </p>
                 <p className="mt-2 text-xs leading-relaxed">
-                  <span className="news-caps text-[8px] text-accent-deep">Why now · </span>
+                  <span className="news-caps text-[10px] text-accent-deep">Why now · </span>
                   {pitch.whyNow}
                 </p>
 
                 <details className="group mt-3 border-t border-rule-soft pt-2">
-                  <summary className="news-caps cursor-pointer list-none text-[8px] text-ink-soft hover:text-accent-deep">
+                  <summary className="news-caps cursor-pointer list-none text-[10px] text-ink-soft hover:text-accent-deep">
                     {pitch.claims.length} sourced claims{" "}
                     <span aria-hidden="true" className="group-open:hidden">
                       +
@@ -115,7 +128,7 @@ export function BidBoard({
                     {pitch.claims.map((claim, index) => (
                       <li key={`${pitch.id}-claim-${index}`} className="text-xs leading-snug">
                         {claim.text}{" "}
-                        <span className="ledger-num whitespace-nowrap text-[9px] text-accent-deep">
+                        <span className="ledger-num whitespace-nowrap text-[10px] text-accent-deep">
                           [{claim.sourceId}]
                         </span>
                       </li>
@@ -128,9 +141,9 @@ export function BidBoard({
                     Fee {formatNear(pitch.requestedFee)} NEAR · {pitch.wordCount} words
                   </p>
                   {isSelected ? (
-                    <p className="text-[10px] font-semibold text-success">Commissioned</p>
+                    <p className="text-[11px] font-semibold text-success">Commissioned</p>
                   ) : rejection ? (
-                    <p className="text-[10px] text-ink-soft">Passed: {rejection}</p>
+                    <p className="text-[11px] text-ink-soft">Passed: {rejection}</p>
                   ) : null}
                 </div>
               </li>

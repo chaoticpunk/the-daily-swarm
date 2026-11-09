@@ -44,7 +44,7 @@ export default function SampleEditionPage() {
   return (
     <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
       <aside className="mt-4 border-l-4 border-gold bg-gold/15 px-4 py-3">
-        <p className="news-caps text-[9px] text-accent-deep">
+        <p className="news-caps text-[10px] text-accent-deep">
           Sample edition · read-only
         </p>
         <p className="mt-1 max-w-4xl text-xs leading-relaxed">
@@ -66,12 +66,12 @@ export default function SampleEditionPage() {
 
       <header className="border-b-2 border-ink py-7">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-rule-soft pb-3">
-          <p className="news-caps text-[10px] text-ink-soft">
+          <p className="news-caps text-[11px] text-ink-soft">
             {editionDateLabel(edition.date)}
           </p>
-          <p className="news-caps text-[9px] text-ink-soft">{SITE.demoLabel}</p>
+          <p className="news-caps text-[10px] text-ink-soft">{SITE.demoLabel}</p>
           <p
-            className="news-caps bg-gold/30 px-2 py-1 text-[9px] text-ink"
+            className="news-caps bg-gold/30 px-2 py-1 text-[10px] text-ink"
             role="status"
           >
             Sample · unlocked for review
@@ -80,7 +80,7 @@ export default function SampleEditionPage() {
 
         <div className="mt-5 grid gap-5 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <p className="news-caps text-[10px] text-accent-deep">
+            <p className="news-caps text-[11px] text-accent-deep">
               Sample · curated sources
             </p>
             <h1 className="font-headline mt-2 text-4xl leading-[0.98] font-bold tracking-tight sm:text-5xl lg:text-6xl">
@@ -102,7 +102,7 @@ export default function SampleEditionPage() {
               ["Fees", `${formatNear(assignmentFees)} NEAR`],
             ].map(([label, value]) => (
               <div key={label}>
-                <dt className="news-caps text-[8px] text-ink-soft">{label}</dt>
+                <dt className="news-caps text-[10px] text-ink-soft">{label}</dt>
                 <dd className="ledger-num mt-1 text-sm">{value}</dd>
               </div>
             ))}
@@ -115,7 +115,7 @@ export default function SampleEditionPage() {
         className="grid gap-6 border-b border-rule py-7 lg:grid-cols-12"
       >
         <div className="lg:col-span-8">
-          <p className="news-caps text-[10px] text-accent-deep">
+          <p className="news-caps text-[11px] text-accent-deep">
             Editor&apos;s note
           </p>
           <h2 id="sample-editors-note-heading" className="sr-only">
@@ -133,7 +133,7 @@ export default function SampleEditionPage() {
           ) : null}
         </div>
         <div className="lg:col-span-4 lg:border-l lg:border-rule lg:pl-5">
-          <p className="news-caps text-[9px] text-ink-soft">Front page order</p>
+          <p className="news-caps text-[10px] text-ink-soft">Front page order</p>
           <ol className="mt-2 space-y-2">
             {stories.map((story, index) => (
               <li key={story.id} className="flex gap-3 text-xs">
@@ -146,7 +146,7 @@ export default function SampleEditionPage() {
               </li>
             ))}
           </ol>
-          <p className="mt-3 text-[10px] text-ink-soft">
+          <p className="mt-3 text-[11px] text-ink-soft">
             Reported, written, checked, and laid out by autonomous desks. Curated
             sources only.
           </p>
@@ -170,7 +170,7 @@ export default function SampleEditionPage() {
             aria-labelledby="sample-settlement-heading"
             className="mt-10 border-t-2 border-ink pt-6"
           >
-            <p className="news-caps text-[10px] text-accent-deep">
+            <p className="news-caps text-[11px] text-accent-deep">
               What the live edition adds
             </p>
             <h2
@@ -198,11 +198,11 @@ export default function SampleEditionPage() {
                 },
               ].map((card) => (
                 <div key={card.label} className="paper-inset p-4">
-                  <p className="news-caps text-[8px] text-ink-soft">
+                  <p className="news-caps text-[10px] text-ink-soft">
                     {card.label}
                   </p>
                   <p className="ledger-num mt-2 text-lg">{card.value}</p>
-                  <p className="mt-2 text-[10px] leading-relaxed text-ink-soft">
+                  <p className="mt-2 text-[11px] leading-relaxed text-ink-soft">
                     {card.body}
                   </p>
                 </div>
@@ -231,7 +231,7 @@ export default function SampleEditionPage() {
         <aside className="min-w-0 lg:col-span-4">
           <div className="space-y-4 lg:sticky lg:top-4">
             <div className="paper-panel p-5">
-              <p className="news-caps text-[9px] text-accent-deep">
+              <p className="news-caps text-[10px] text-accent-deep">
                 Read-only sample
               </p>
               <h2 className="font-headline mt-1 text-2xl font-bold">
@@ -245,13 +245,13 @@ export default function SampleEditionPage() {
               <div className="mt-4 flex flex-col gap-2">
                 <Link
                   href="/newsroom"
-                  className="news-caps bg-ink px-4 py-2.5 text-center text-[10px] text-newsprint transition-colors hover:bg-accent-deep"
+                  className="news-caps bg-ink px-4 py-2.5 text-center text-[11px] text-newsprint transition-colors hover:bg-accent-deep"
                 >
                   Produce a live edition →
                 </Link>
                 <Link
                   href="/ledger"
-                  className="news-caps border border-ink px-4 py-2.5 text-center text-[10px] transition-colors hover:border-accent hover:text-accent-deep"
+                  className="news-caps border border-ink px-4 py-2.5 text-center text-[11px] transition-colors hover:border-accent hover:text-accent-deep"
                 >
                   View the public ledger
                 </Link>
@@ -259,7 +259,7 @@ export default function SampleEditionPage() {
             </div>
 
             <div className="paper-inset p-4">
-              <p className="news-caps text-[9px] text-ink-soft">
+              <p className="news-caps text-[10px] text-ink-soft">
                 What is real on this page
               </p>
               <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-ink-soft">
@@ -277,7 +277,7 @@ export default function SampleEditionPage() {
             </div>
 
             <div className="paper-inset p-4">
-              <p className="news-caps text-[9px] text-ink-soft">
+              <p className="news-caps text-[10px] text-ink-soft">
                 One line to remember
               </p>
               <p className="font-headline mt-2 text-lg leading-snug">

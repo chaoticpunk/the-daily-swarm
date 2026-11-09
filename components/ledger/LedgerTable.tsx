@@ -24,19 +24,19 @@ export function LedgerTable({ entries }: { entries: LedgerEntry[] }) {
         </caption>
         <thead>
           <tr className="border-b-2 border-ink">
-            <th scope="col" className="news-caps px-3 py-2 text-[8px] text-ink-soft">
+            <th scope="col" className="news-caps px-3 py-2 text-[10px] text-ink-soft">
               Entry
             </th>
-            <th scope="col" className="news-caps px-3 py-2 text-[8px] text-ink-soft">
+            <th scope="col" className="news-caps px-3 py-2 text-[10px] text-ink-soft">
               From → To
             </th>
-            <th scope="col" className="news-caps px-3 py-2 text-right text-[8px] text-ink-soft">
+            <th scope="col" className="news-caps px-3 py-2 text-right text-[10px] text-ink-soft">
               Amount
             </th>
-            <th scope="col" className="news-caps px-3 py-2 text-[8px] text-ink-soft">
+            <th scope="col" className="news-caps px-3 py-2 text-[10px] text-ink-soft">
               Status
             </th>
-            <th scope="col" className="news-caps px-3 py-2 text-[8px] text-ink-soft">
+            <th scope="col" className="news-caps px-3 py-2 text-[10px] text-ink-soft">
               Transaction
             </th>
           </tr>
@@ -52,16 +52,16 @@ export function LedgerTable({ entries }: { entries: LedgerEntry[] }) {
                       ? ROLE_LABEL[entry.role]
                       : "Contributor payout"}
                 </p>
-                <p className="mt-0.5 text-[10px] text-ink-soft">
+                <p className="mt-0.5 text-[11px] text-ink-soft">
                   {entry.type === "reader_payment" ? "Edition unlock" : "Revenue split"}
                   {entry.agentId ? ` · ${entry.agentId}` : ""}
                 </p>
               </td>
               <td className="px-3 py-2.5 align-top">
-                <p className="ledger-num text-[10px]" title={entry.from}>
+                <p className="ledger-num text-[11px]" title={entry.from}>
                   {shortAccount(entry.from, 14, 8)}
                 </p>
-                <p className="ledger-num text-[10px] text-ink-soft" title={entry.to}>
+                <p className="ledger-num text-[11px] text-ink-soft" title={entry.to}>
                   → {shortAccount(entry.to, 14, 8)}
                 </p>
               </td>
@@ -71,7 +71,7 @@ export function LedgerTable({ entries }: { entries: LedgerEntry[] }) {
               <td className="px-3 py-2.5 align-top">
                 <span
                   className={cn(
-                    "news-caps inline-block px-1.5 py-0.5 text-[7px]",
+                    "news-caps inline-block px-1.5 py-0.5 text-[10px]",
                     entry.status === "confirmed" && "bg-success/10 text-success",
                     entry.status === "failed" && "bg-accent/10 text-accent-deep",
                     entry.status === "local" && "bg-gold/30 text-ink",
@@ -81,17 +81,17 @@ export function LedgerTable({ entries }: { entries: LedgerEntry[] }) {
                   {STATUS_LABEL[entry.status]}
                 </span>
                 {entry.kind === "retained" ? (
-                  <p className="mt-1 max-w-[190px] text-[9px] leading-snug text-ink-soft">
+                  <p className="mt-1 max-w-[190px] text-[10px] leading-snug text-ink-soft">
                     Retained in treasury; no self-transfer.
                   </p>
                 ) : null}
                 {entry.kind === "local" ? (
-                  <p className="mt-1 max-w-[190px] text-[9px] leading-snug text-ink-soft">
+                  <p className="mt-1 max-w-[190px] text-[10px] leading-snug text-ink-soft">
                     {entry.note}
                   </p>
                 ) : null}
                 {entry.status === "failed" && entry.note ? (
-                  <p className="mt-1 max-w-[190px] text-[9px] leading-snug text-accent-deep">
+                  <p className="mt-1 max-w-[190px] text-[10px] leading-snug text-accent-deep">
                     {entry.note}
                   </p>
                 ) : null}
@@ -102,13 +102,13 @@ export function LedgerTable({ entries }: { entries: LedgerEntry[] }) {
                     href={entry.explorerUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="ledger-num text-[10px] text-accent-deep underline decoration-rule hover:decoration-accent"
+                    className="ledger-num text-[11px] text-accent-deep underline decoration-rule hover:decoration-accent"
                     title={entry.txHash}
                   >
                     {shortHash(entry.txHash)} ↗
                   </a>
                 ) : (
-                  <span className="text-[10px] text-ink-soft">
+                  <span className="text-[11px] text-ink-soft">
                     {entry.kind === "retained"
                       ? "No transfer"
                       : entry.kind === "local"
@@ -117,7 +117,7 @@ export function LedgerTable({ entries }: { entries: LedgerEntry[] }) {
                   </span>
                 )}
                 {entry.status === "confirmed" && entry.txHash ? (
-                  <p className="mt-1 text-[9px] text-ink-soft">Final on testnet</p>
+                  <p className="mt-1 text-[10px] text-ink-soft">Final on testnet</p>
                 ) : null}
               </td>
             </tr>

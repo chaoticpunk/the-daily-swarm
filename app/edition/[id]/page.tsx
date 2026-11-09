@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 function EditionFallback() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8" aria-live="polite">
-      <p className="news-caps text-[10px] text-accent-deep">Loading edition</p>
+      <p className="news-caps text-[11px] text-accent-deep">Loading edition</p>
       <div className="mt-4 space-y-3" aria-hidden="true">
         <div className="h-8 w-2/3 bg-newsprint-deep" />
         <div className="h-4 w-1/2 bg-newsprint-deep" />
