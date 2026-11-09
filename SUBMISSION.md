@@ -41,12 +41,14 @@ Repo: https://github.com/chaoticpunk/the-daily-swarm
 | `npm test` | 48 tests · 8 files |
 | `npm run build` | pass · 20 route entries, including `/sample` |
 | Fresh worktree, no `.env.local` | `npm ci` + `npm test` + `npm run build` pass |
-| Live routes `/`, `/newsroom`, `/ledger` | HTTP 200 |
-| Live `/api/health` | `ok:true`, LLM configured, NEAR testnet |
+| Live routes `/`, `/sample`, `/newsroom`, `/ledger` | HTTP 200 |
+| Live `/api/health` | `ok:true`, LLM configured, NEAR testnet, `payoutsReady:false` |
+| Live `/api/agent/pitch` | HTTP 200 · `Qwen/Qwen3.8-27B` · 7.1s |
+| Vercel Production env | `NEARAI_CLOUD_API_KEY` set; **no `NEAR_TREASURY_PRIVATE_KEY`** |
 | CI on latest `main` | success |
 | Repository visibility | public |
 
-After pushing this change, confirm the live `/sample` route returns 200 and add it to the checklist. The rest of the app is already deployed; the sample page is new.
+The production deployment was promoted with `vercel --prod` after the merge. The live sample route returns 200, and the live pitch endpoint produced a real pitch with the production key. Vercel is not auto-deploying from GitHub, so future changes need `npx vercel --prod` or `vercel git connect`.
 
 ## What is on-chain vs local
 
@@ -106,7 +108,8 @@ Repo: https://github.com/chaoticpunk/the-daily-swarm
 - [x] Live demo is reachable
 - [x] Fresh clone builds and tests without `.env.local`
 - [x] Sample edition added to the repository
-- [ ] Sample edition deployed; live `/sample` returns 200
+- [x] Sample edition deployed; live `/sample` returns 200
+- [x] Live LLM smoke test passed (`/api/agent/pitch`, production key)
 - [ ] Demo video recorded
 - [ ] X thread posted by the human author; first tweet contains the video
 - [ ] Form submitted with the repository link and the demo post link
