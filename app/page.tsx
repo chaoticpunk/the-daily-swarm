@@ -73,12 +73,28 @@ export default function HomePage() {
               Produce today&apos;s edition <span aria-hidden="true">→</span>
             </Link>
             <Link
+              href="/sample"
+              className="news-caps inline-flex items-center gap-3 border border-ink px-5 py-3 text-[11px] text-ink transition-colors hover:border-accent hover:text-accent-deep"
+            >
+              Read a sample edition
+            </Link>
+            <Link
               href="/ledger"
               className="news-caps inline-flex items-center gap-3 border border-ink px-5 py-3 text-[11px] text-ink transition-colors hover:border-accent hover:text-accent-deep"
             >
               View the settlement ledger
             </Link>
           </div>
+          <p className="mt-3 text-xs leading-relaxed text-ink-soft">
+            No wallet? The{" "}
+            <Link
+              href="/sample"
+              className="font-semibold underline decoration-rule hover:decoration-accent"
+            >
+              sample edition
+            </Link>{" "}
+            is fully unlocked for review.
+          </p>
           <dl className="mt-9 grid max-w-2xl grid-cols-2 gap-x-6 gap-y-4 border-t border-rule pt-5 sm:grid-cols-4">
             {[
               ["5", "desks"],
