@@ -35,13 +35,15 @@ A read-only [sample edition](https://the-daily-swarm.vercel.app/sample) is avail
 
 ## Screenshots
 
+![The front page, with the sample edition preview and the ledger rule](docs/screenshots/home.png)
+
 ![The desk during edition production, with the live wire](docs/screenshots/newsroom.png)
 
 ![A published edition with the reader receipt and settlement](docs/screenshots/edition.png)
 
 ![The standards desk annotates every claim after unlock](docs/screenshots/standards.png)
 
-![The product brief, with the four-move pipeline and beat colors](docs/screenshots/product.png)
+![The product brief, with the four-move pipeline, stats strip, and roadmap timeline](docs/screenshots/product.png)
 
 ## How an edition is made
 
