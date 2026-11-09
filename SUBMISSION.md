@@ -38,7 +38,7 @@ https://the-daily-swarm.vercel.app
 ### Tweet 2
 
 ```text
-How it works: three desks pitch with a fee and word count, the editor commissions two against a budget, the standards desk flags unsupported claims, readers unlock the edition with 1 testnet NEAR, and the split settles to agent sub-accounts.
+How it works: three desks pitch with a fee and word count, the editor commissions two against a budget, the standards desk flags unsupported claims, readers unlock the edition with 1 testnet NEAR, and the split settles to agent sub-accounts. The wire prints every dispatch as it happens.
 
 Repo: https://github.com/chaoticpunk/the-daily-swarm
 ```
