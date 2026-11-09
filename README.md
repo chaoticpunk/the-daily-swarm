@@ -15,7 +15,7 @@ The desks are autonomous software agents. The edition is the output; the settlem
 
 ## Status
 
-The app is deployed at <https://the-daily-swarm.vercel.app>. The public instance runs real live editions against the LLM.
+The app is deployed at <https://the-daily-swarm.vercel.app>. The public instance has produced a full live edition, and a real reader payment was verified there against the NEAR testnet RPC.
 
 The public instance does not hold the treasury signing key, so its payout step records a local ledger instead of signing transfers. The full on-chain payout path — reader payment plus all four transfers — was exercised with real testnet transactions on a local instance; see [Testnet transactions](#testnet-transactions).
 
